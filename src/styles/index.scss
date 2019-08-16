@@ -1,0 +1,140 @@
+@import "variables";
+
+body {
+  font-family: 'OpenSans', sans-serif;
+}
+
+.voomsway-filter {
+  box-shadow: 0 1px 5px 0 rgba(154, 158, 159, 0.41);
+  border: solid 1px #dee4e9;
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.voomsway-form {
+  display: flex;
+  flex-wrap: wrap;
+
+  .vway-select-field {
+    flex: 0 0 calc(50% - 6px);
+    margin-bottom: 10px;
+  }
+
+  .vway-select-field:nth-of-type(odd) {
+    margin-right: 12px;
+  }
+
+  .vway-select-field-full {
+    flex: 0 0 100%;
+    margin-bottom: 12px;
+  }
+
+  .vway-form-label {
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+}
+
+.react-select__indicator-separator {
+  display: none;
+}
+
+.react-select__value-container {
+  height: 30px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.react-select__dropdown-indicator {
+  color: #88a6b7;
+}
+
+.react-select__multi-value {
+  height: 24px;
+  border-radius: 17px;
+  background-color: #ffffff;
+  border: solid 1px #eff2f6;
+
+  .react-select__multi-value__label {
+    color: #94a1b8;
+  }
+
+  .react-select__multi-value__remove {
+    cursor: pointer;
+    color: #e9ecef;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+.react-select__menu {
+  z-index: 999;
+}
+
+.react-select__control {
+  height: 42px;
+  font-size: 12px;
+  border: solid 1px #dfe8ef !important;
+  background: #f6f8fb;
+  border-radius: 0 !important;
+}
+
+.react-select__single-value {
+  color: #94a1b8;
+}
+
+// button
+
+.btn-custom {
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  font-family: ProximaNova;
+  border: none;
+  cursor: pointer;
+  opacity: 1;
+  margin-top: 10px;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:disabled {
+    opacity: 0.7;
+  }
+  &:focus {
+    outline: 0;
+  }
+  &.btn-custom-lg {
+    padding: 14px 50px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  &.btn-custom-curved {
+    border-radius: 22px;
+  }
+  &.btn-custom-info {
+    color: #d6f5f9;
+    background-color: $color-info;
+  }
+  &.btn-custom-primary {
+    color: #d6f5f9;
+    background-color: $color-primary;
+  }
+  &.block {
+    width: 100%;
+  }
+}
+
+
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
