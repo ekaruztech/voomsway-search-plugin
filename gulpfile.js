@@ -2,19 +2,19 @@ let gulp = require('gulp');
 let concat = require('gulp-concat');
 
 const jsFiles = 'build/static/**/*.js',
-  jsDest = 'voomsway_dist/js',
+  jsDest = 'voomsway-filter',
   cssFiles = 'build/static/**/*.css',
-  cssDest = 'voomsway_dist/css';
+  cssDest = 'voomsway-filter';
 
 gulp.task('merge-js', function() {
   return gulp.src(jsFiles)
-    .pipe(concat('merged-js.js'))
+    .pipe(concat('voomsway-filter.js'))
     .pipe(gulp.dest(jsDest));
 });
 
 gulp.task('merge-css', function() {
   return gulp.src(cssFiles)
-    .pipe(concat('merged-css.css'))
+    .pipe(concat('voomsway-filter.css'))
     .pipe(gulp.dest(cssDest));
 });
 

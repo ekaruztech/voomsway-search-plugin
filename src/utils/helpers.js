@@ -14,3 +14,8 @@ export const searchDateArray = (count = 7) => {
   }
   return array;
 };
+
+export const vehicleTypesUrl = "/resources/vehicle-types";
+// export const terminalsUrl = '/terminals?selection=account name destinations location.city location.state&all=true&population=[{"path": "destinations", "select": "account name destinations location.city location.state"}]';
+export const terminalsUrl =
+  "/terminals?selection=account name destinations location.city location.state&all=true";
