@@ -5,7 +5,7 @@ import SelectInputField from "../common/SelectInputField";
 import { searchDateArray } from "../../utils/helpers";
 
 const Filters = props => {
-  const { selectWrapperDiv, terminals, vehicleTypes } = props;
+  const { selectWrapperDiv, terminals } = props;
   const defaultFormValues = {
     source: null,
     vehicle_type: null,
@@ -15,11 +15,11 @@ const Filters = props => {
   const [filterFormValues, setFilterFormValues] = useState(defaultFormValues); // react select object values
   const [filterValues, setFilterValues] = useState({}); // what to send
   const [destinationsOptions, setDestinationsOptions] = useState([]);
+  const [tripType, setTripType] = useState("option1");
 
-  const { source, destination, departure_date } = filterValues;
+  const { departure_date } = filterValues;
 
   const handleSourceChange = (name, selected) => {
-    // handleChange(name, selected);
     setFilterFormValues({
       ...filterFormValues,
       [name]: selected,
@@ -58,25 +58,62 @@ const Filters = props => {
     });
   };
 
+  const tripTypeOnchange = event => {
+    setTripType(event.target.value);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
-    if (source && destination && departure_date) {
+    if (departure_date) {
       const result = queryString.stringify(filterValues);
-      const url = `${window.location.origin}/vway-bookings?${result}`;
-      // window.location.href = url;
-      console.log(url, "url>>>>>>>>>>");
+      const url = `${window.location.origin}/vm/guo/trips?${result}`;
+      console.log(url, "url");
+      window.location.href = url;
     }
   };
 
+  const passengerList = Array.from({ length: 10 }, (v, k) => k + 1);
+
   return (
     <form onSubmit={handleSubmit} className="voomsway-form">
+      <div className={`${selectWrapperDiv} trip-type-group`}>
+        <div>
+          <label
+            className={`vm-btn-secondary ${
+              "option1" === tripType ? "active" : ""
+            }`}
+          >
+            <input
+              type="radio"
+              name="options"
+              value="option1"
+              onChange={tripTypeOnchange}
+              checked={"option1" === tripType}
+            />{" "}
+            One Way
+          </label>
+          <label
+            className={`vm-btn-secondary ${
+              "option2" === tripType ? "active" : ""
+            }`}
+          >
+            <input
+              type="radio"
+              name="options"
+              value="option2"
+              onChange={tripTypeOnchange}
+              checked={"option2" === tripType}
+            />{" "}
+            Round Trip
+          </label>
+        </div>
+      </div>
       <SelectInputField
         wrapperDivClass={selectWrapperDiv}
         name="source"
-        placeholder="- Source -"
+        placeholder="- Departure Terminal -"
+        isSearchable
         onChange={handleSourceChange}
-        isSearchable={true}
-        value={filterFormValues.source}
         options={terminals.map(
           item =>
             item &&
@@ -85,14 +122,15 @@ const Filters = props => {
               value: item._id
             }
         )}
+        value={filterFormValues.source}
       />
 
       <SelectInputField
         wrapperDivClass={selectWrapperDiv}
         name="destination"
-        placeholder="- Destination -"
+        placeholder="- Destination Terminal -"
+        isSearchable
         onChange={handleChange}
-        isSearchable={true}
         disabled={!destinationsOptions.length}
         options={destinationsOptions.map(
           item =>
@@ -114,34 +152,68 @@ const Filters = props => {
         value={filterFormValues.departure_date}
       />
 
+      {"option2" === tripType && (
+        <SelectInputField
+          wrapperDivClass={selectWrapperDiv}
+          name="arrival_date"
+          placeholder="- Arrival Date -"
+          onChange={handleChange}
+          options={searchDateArray(7)}
+          value={filterFormValues.arrival_date}
+        />
+      )}
+
       <SelectInputField
         wrapperDivClass={selectWrapperDiv}
-        name="vehicle_type"
-        placeholder="- Vehicle Type -"
+        name="no_of_adult"
+        placeholder="- Adult Passengers -"
         onChange={handleChange}
-        isSearchable={true}
-        value={filterFormValues.vehicle_type}
-        options={vehicleTypes.map(item => ({
-          label: item.name,
-          value: item._id
+        value={filterFormValues.no_of_adult}
+        options={passengerList.map(item => ({
+          label: item,
+          value: item
         }))}
       />
 
-      <button
-        type="submit"
-        className="btn-custom btn-custom-lg btn-vm-custom-primary"
-        disabled={!source || !destination || !departure_date}
-      >
-        Search Trips
-      </button>
+      <SelectInputField
+        wrapperDivClass={selectWrapperDiv}
+        name="no_of_children"
+        placeholder="- Children(2-10yrs) Passengers -"
+        onChange={handleChange}
+        value={filterFormValues.no_of_children}
+        options={passengerList.map(item => ({
+          label: item,
+          value: item
+        }))}
+      />
+
+      {/*<SelectInputField*/}
+      {/*  wrapperDivClass={selectWrapperDiv}*/}
+      {/*  name="vehicle_type"*/}
+      {/*  placeholder="- Vehicle Type -"*/}
+      {/*  onChange={handleChange}*/}
+      {/*  value={filterFormValues.vehicle_type}*/}
+      {/*  options={vehicleTypes.map(item => ({*/}
+      {/*    label: item.name,*/}
+      {/*    value: item._id*/}
+      {/*  }))}*/}
+      {/*/>*/}
+      <div className={selectWrapperDiv}>
+        <button
+          type="submit"
+          className="btn-custom btn-vm-custom-primary"
+          disabled={!departure_date}
+        >
+          Search Trips
+        </button>
+      </div>
     </form>
   );
 };
 
 Filters.propTypes = {
   selectWrapperDiv: PropTypes.string.isRequired,
-  terminals: PropTypes.arrayOf(PropTypes.object).isRequired,
-  vehicleTypes: PropTypes.arrayOf(PropTypes.object).isRequired
+  terminals: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default Filters;
