@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const root = document.getElementById("voomsway-search-root");
-const apiUrl = root.dataset.apiUrl;
+const apiUrl = root.dataset.apiurl;
 const api_key = root.dataset.apikey;
 
 console.log("root.dataset ", root.dataset);
