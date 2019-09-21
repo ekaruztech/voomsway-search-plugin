@@ -31,19 +31,19 @@ const App = () => {
   }, []);
 
   const handleResize = () => {
-    let elem = document.querySelector(".voomsway-filter");
+    let elem = document.querySelector(".vm-voomsway-filter");
     const divWidth = elem.offsetWidth;
-    let widthForFields = "vway-select-field-3";
+    let widthForFields = "vm-select-field";
     if (divWidth > 767 && divWidth < 1024) {
-      widthForFields = "vway-select-field-4";
+      widthForFields = "vm-select-field-6";
     } else if (divWidth < 768) {
-      widthForFields = "vway-select-field-12";
+      widthForFields = "vm-select-field-12";
     }
     setSelectWrapperDiv(widthForFields);
   };
 
   return (
-    <div className="voomsway-filter">
+    <div className="vm-voomsway-filter">
       <EventListener target="window" onResize={handleResize} />
       <Filters terminals={terminals} selectWrapperDiv={selectWrapperDiv} />
     </div>

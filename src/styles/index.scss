@@ -6,46 +6,83 @@ body {
   line-height: 1.5;
 }
 
-.voomsway-filter {
+// set background of div
+.vm-voomsway-filter {
   font-family: 'OpenSans', sans-serif;
   padding: 33px 33px 23px 33px;
-  background-color: rgba(0, 0, 0, .5);
+  //background-color: rgba(0, 0, 0, .5);
+  background-color: #ffffff;
 }
 
-.voomsway-form {
+// filter form fields section
+.vm-filter-fields-section {
   display: flex;
   flex-wrap: wrap;
 
-  .vway-select-field-3 {
+  .vm-select-field-3 {
     flex: 0 0 calc(25% - 9px);
     margin-bottom: 10px;
     margin-right: 12px;
   }
 
-  .vway-select-field-3:nth-of-type(4n) {
+  .vm-select-field-3:nth-of-type(4n) {
     margin-right: 0;
   }
 
-  .vway-select-field-4 {
+  .vm-select-field-4 {
     flex: 0 0 calc(33.333% - 8px);
     margin-bottom: 10px;
     margin-right: 12px;
   }
 
-  .vway-select-field-4:nth-of-type(3n) {
+  .vm-select-field-4:nth-of-type(3n) {
     margin-right: 0;
   }
 
-  .vway-select-field-12 {
+  .vm-select-field-6 {
+    flex: 1 0 calc(50% - 12px);
+    margin-bottom: 10px;
+    margin-right: 12px;
+  }
+
+  .vm-select-field-6:nth-of-type(2n) {
+    margin-right: 0;
+  }
+
+  .vm-select-field-6:last-of-type {
+    margin-right: 0;
+  }
+
+  .vm-select-field {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  .vm-select-field:last-of-type {
+    margin-right: 0;
+  }
+
+  .vm-select-field-12 {
     flex: 0 0 100%;
     margin-bottom: 10px;
   }
 
-  .vway-form-label {
+  .vm-form-label {
     font-size: 14px;
     font-weight: 600;
     display: inline-block;
     margin-bottom: 6px;
+  }
+
+  .react-select__menu-list {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .react-select__single-value,  .react-select__placeholder{
+    font-size: 12px;
+    color: #000000;
+    text-transform: capitalize;
   }
 
   .react-select__menu {
@@ -61,6 +98,7 @@ body {
       user-select: none;
       color: #000000;
       cursor: pointer;
+      text-transform: capitalize;
     }
     .react-select__option--is-focused {
       background-color: rgba(0, 0, 0, 0.1);
@@ -71,23 +109,17 @@ body {
     background-color: #e3e3e3 !important;
   }
 
-  .react-select__menu-list {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .react-select__single-value,  .react-select__placeholder{
-    font-size: 12px;
-    color: #000000;
-  }
-
   .react-select__control {
     height: 42px;
     font-size: 12px;
-    border: solid 1px #dfe8ef !important;
-    background: #ffffff;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+    //border: solid 1px #dfe8ef !important;
+    border: solid 1px #dfe8ef;
+    //background: #ffffff;
+    background: #f6f8fb;
+    border-radius: 0;
+    //border-radius: 0 !important;
+    box-shadow: none;
+    //box-shadow: none !important;
   }
 
   .react-select__input input[type=text] {
@@ -131,74 +163,42 @@ body {
       }
     }
   }
+}
 
-  .trip-type-group {
-    display: inline-flex;
-    vertical-align: middle;
-    background-color: #ffffff;
-    border-radius: 0;
-    > div {
-      padding: 5px 10px;
-      width: 100%;
-      display: flex;
-    }
-
-    input[type=radio] {
-      //position: absolute;
-      //clip: rect(0,0,0,0);
-      //pointer-events: none;
-      appearance: none;
-    }
-  }
-
-  .vm-btn-secondary {
-    flex: 1 1 auto;
-    color: #000;
-    background-color: #ffffff;
-    border-color: #ffffff;
-    font-size: 12px;
-    border-radius: 0;
-    user-select: none;
-    line-height: 1.5;
-    margin-bottom: 0;
-    cursor: pointer;
-    justify-content: center;
-    align-items: center;
+// div holding two checkbox
+.vm-trip-type-group {
+  flex: 0 0 100%;
+  margin-bottom: 10px;
+  > div {
     display: flex;
-
-    &.active {
-      color: #fff;
-      background-color: #00478a;
-      border-color: #00478a;
-    }
   }
 
-  .btn-vm-custom-primary {
-    width: 100%;
-    border: solid 1px $accent-color;
-    background-color: $accent-color;
-    font-size: 12px;
-    font-weight: 700;
-    border-radius: 0;
+  input[type=radio] {
+    //position: absolute;
+    //clip: rect(0,0,0,0);
+    //pointer-events: none;
+    appearance: none;
+  }
+}
+
+// checkbox label css
+.vm-checkbox-label {
+  padding: 12px 50px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: normal;
+
+  color: #000;
+  background-color: #ffffff;
+  user-select: none;
+  cursor: pointer;
+  border: solid 1px #eff2f6;
+
+  &.active {
     color: #fff;
-    cursor: pointer;
-    text-transform: uppercase;
-    margin: 0;
-    height: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    &:hover {
-      background-color: darken($accent-color, 5%);
-    }
-    &:disabled {
-      opacity: 0.8;
-      &:hover {
-        opacity: 0.8;
-        background-color: $accent-color !important;
-      }
-    }
+    background-color: #00478a;
+    border-color: #00478a;
+    pointer-events: none;
   }
 }
 
@@ -208,4 +208,32 @@ body {
   margin-top: .25rem;
   font-size: 80%;
   color: #dc3545;
+}
+
+.vm-btn-primary {
+  width: 100%;
+  border: solid 1px $accent-color;
+  background-color: $accent-color;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 0;
+  color: #ffffff;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin: 0;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  &:hover {
+    background-color: darken($accent-color, 5%);
+  }
+  &:disabled {
+    opacity: 0.8;
+    &:hover {
+      opacity: 0.8;
+      background-color: $accent-color !important;
+    }
+  }
 }

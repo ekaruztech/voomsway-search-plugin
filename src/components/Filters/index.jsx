@@ -66,20 +66,18 @@ const Filters = props => {
     event.preventDefault();
     if (departure_date) {
       const result = queryString.stringify(filterValues);
-      const url = `${window.location.origin}/vm/guo/trips?${result}`;
-      console.log(url, "url");
+      const url = `${window.location.origin}/vway/trips?${result}`;
       window.location.href = url;
     }
   };
 
-  const passengerList = Array.from({ length: 10 }, (v, k) => k + 1);
-
+  // const passengerList = Array.from({ length: 10 }, (v, k) => k + 1);
   return (
-    <form onSubmit={handleSubmit} className="voomsway-form">
-      <div className={`${selectWrapperDiv} trip-type-group`}>
+    <form onSubmit={handleSubmit} className="vm-filter-form">
+      <div className="vm-trip-type-group">
         <div>
           <label
-            className={`vm-btn-secondary ${
+            className={`vm-checkbox-label ${
               "option1" === tripType ? "active" : ""
             }`}
           >
@@ -89,11 +87,11 @@ const Filters = props => {
               value="option1"
               onChange={tripTypeOnchange}
               checked={"option1" === tripType}
-            />{" "}
+            />
             One Way
           </label>
           <label
-            className={`vm-btn-secondary ${
+            className={`vm-checkbox-label ${
               "option2" === tripType ? "active" : ""
             }`}
           >
@@ -103,109 +101,77 @@ const Filters = props => {
               value="option2"
               onChange={tripTypeOnchange}
               checked={"option2" === tripType}
-            />{" "}
+            />
             Round Trip
           </label>
         </div>
       </div>
-      <SelectInputField
-        wrapperDivClass={selectWrapperDiv}
-        name="source"
-        placeholder="- Departure Terminal -"
-        isSearchable
-        onChange={handleSourceChange}
-        options={terminals.map(
-          item =>
-            item &&
-            item.location && {
-              label: `${item.location.city},${item.location.state}`,
-              value: item._id
-            }
-        )}
-        value={filterFormValues.source}
-      />
 
-      <SelectInputField
-        wrapperDivClass={selectWrapperDiv}
-        name="destination"
-        placeholder="- Destination Terminal -"
-        isSearchable
-        onChange={handleChange}
-        disabled={!destinationsOptions.length}
-        options={destinationsOptions.map(
-          item =>
-            item &&
-            item.location && {
-              label: `${item.location.city}, ${item.location.state}`,
-              value: item._id
-            }
-        )}
-        value={filterFormValues.destination}
-      />
-
-      <SelectInputField
-        wrapperDivClass={selectWrapperDiv}
-        name="departure_date"
-        placeholder="- Departure Date -"
-        onChange={handleChange}
-        options={searchDateArray(7)}
-        value={filterFormValues.departure_date}
-      />
-
-      {"option2" === tripType && (
+      <div className="vm-filter-fields-section">
         <SelectInputField
           wrapperDivClass={selectWrapperDiv}
-          name="arrival_date"
-          placeholder="- Arrival Date -"
+          name="source"
+          placeholder="- Departure Terminal -"
+          isSearchable
+          onChange={handleSourceChange}
+          options={terminals.map(
+            item =>
+              item &&
+              item.location && {
+                label: `${item.location.city},${item.location.state}`,
+                value: item._id
+              }
+          )}
+          value={filterFormValues.source}
+        />
+
+        <SelectInputField
+          wrapperDivClass={selectWrapperDiv}
+          name="destination"
+          placeholder="- Destination Terminal -"
+          isSearchable
+          onChange={handleChange}
+          disabled={!destinationsOptions.length}
+          options={destinationsOptions.map(
+            item =>
+              item &&
+              item.location && {
+                label: `${item.location.city}, ${item.location.state}`,
+                value: item._id
+              }
+          )}
+          value={filterFormValues.destination}
+        />
+
+        <SelectInputField
+          wrapperDivClass={selectWrapperDiv}
+          name="departure_date"
+          placeholder="- Departure Date -"
           onChange={handleChange}
           options={searchDateArray(7)}
-          value={filterFormValues.arrival_date}
+          value={filterFormValues.departure_date}
         />
-      )}
 
-      <SelectInputField
-        wrapperDivClass={selectWrapperDiv}
-        name="no_of_adult"
-        placeholder="- Adult Passengers -"
-        onChange={handleChange}
-        value={filterFormValues.no_of_adult}
-        options={passengerList.map(item => ({
-          label: item,
-          value: item
-        }))}
-      />
+        {"option2" === tripType && (
+          <SelectInputField
+            wrapperDivClass={selectWrapperDiv}
+            name="arrival_date"
+            placeholder="- Arrival Date -"
+            onChange={handleChange}
+            options={searchDateArray(7)}
+            value={filterFormValues.arrival_date}
+          />
+        )}
 
-      <SelectInputField
-        wrapperDivClass={selectWrapperDiv}
-        name="no_of_children"
-        placeholder="- Children(2-10yrs) Passengers -"
-        onChange={handleChange}
-        value={filterFormValues.no_of_children}
-        options={passengerList.map(item => ({
-          label: item,
-          value: item
-        }))}
-      />
-
-      {/*<SelectInputField*/}
-      {/*  wrapperDivClass={selectWrapperDiv}*/}
-      {/*  name="vehicle_type"*/}
-      {/*  placeholder="- Vehicle Type -"*/}
-      {/*  onChange={handleChange}*/}
-      {/*  value={filterFormValues.vehicle_type}*/}
-      {/*  options={vehicleTypes.map(item => ({*/}
-      {/*    label: item.name,*/}
-      {/*    value: item._id*/}
-      {/*  }))}*/}
-      {/*/>*/}
-      <div className={selectWrapperDiv}>
-        <button
-          type="submit"
-          className="btn-custom btn-vm-custom-primary"
-          disabled={!departure_date}
-        >
-          Search Trips
-        </button>
+        <div className={selectWrapperDiv}>
+          <button
+            type="submit"
+            className="vm-btn-primary"
+            disabled={!departure_date}
+          >
+            Search Trips
+          </button>
+        </div>
       </div>
     </form>
   );

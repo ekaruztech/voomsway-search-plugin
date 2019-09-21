@@ -21,7 +21,7 @@ const SelectInputField = props => {
 
   return (
     <div className={wrapperDivClass}>
-      {label && <label className="vway-form-label">{label}</label>}
+      {label && <label className="vm-form-label">{label}</label>}
       <div>
         <Select
           isClearable={true}
