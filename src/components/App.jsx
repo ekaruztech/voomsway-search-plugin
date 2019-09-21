@@ -8,7 +8,7 @@ import { TabHeader } from "./common/TabHeader";
 import CheckTicket from "./CheckTicket";
 
 const tabs = {
-  buyTicket: "buy-ticket",
+  bookTrip: "book-trip",
   checkTicket: "check-ticket",
   busCharter: "bus-charter"
 };
@@ -18,7 +18,7 @@ const App = () => {
   const [ticketFieldWidth, setTicketFieldDiv] = useState("vm-select-field-4");
   const [error, setError] = useState(false);
   const [terminals, setTerminals] = useState([]);
-  const [activeTab, setActiveTab] = useState(tabs.buyTicket);
+  const [activeTab, setActiveTab] = useState(tabs.bookTrip);
 
   const fetchResources = async () => {
     try {
@@ -26,8 +26,8 @@ const App = () => {
       //   axiosInstance.get(terminalsUrl),
       //   axiosInstance.get(vehicleTypesUrl)
       // ]);
-      // const terminalsResult = await axiosInstance.get(terminalsUrl);
-      // setTerminals(terminalsResult.data.data);
+      const terminalsResult = await axiosInstance.get(terminalsUrl);
+      setTerminals(terminalsResult.data.data);
       // setVehicleTypes(vehicleTypesResult.data.data);
     } catch (error) {
       setError(true);
@@ -61,9 +61,9 @@ const App = () => {
       <div className="vm-tab-section">
         <TabHeader
           setActiveTab={setActiveTab}
-          activeStatus={activeTab === tabs.buyTicket}
-          label="Buy Ticket"
-          tab={tabs.buyTicket}
+          activeStatus={activeTab === tabs.bookTrip}
+          label="Book Trip"
+          tab={tabs.bookTrip}
         />
         <TabHeader
           setActiveTab={setActiveTab}
@@ -73,7 +73,7 @@ const App = () => {
         />
       </div>
       <React.Fragment>
-        {activeTab === tabs.buyTicket && (
+        {activeTab === tabs.bookTrip && (
           <Filters terminals={terminals} selectWrapperDiv={selectWrapperDiv} />
         )}
         {activeTab === tabs.checkTicket && (

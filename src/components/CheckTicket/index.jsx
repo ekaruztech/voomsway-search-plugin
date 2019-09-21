@@ -12,7 +12,7 @@ const CheckTicket = props => {
 
   const checkTicket = () => {
     if (ticketNo) {
-      window.location.href = `${window.location.origin}/vway/receipt/${ticketNo}`;
+      window.location.href = `${window.location.origin}/vway/trips/receipt/${ticketNo}`;
     }
   };
 
