@@ -6,7 +6,7 @@ export const searchDateArray = (count = 7) => {
   // current.date(current.date() + 1);
   for (let i = 0; i < count; i++) {
     const dateData = {
-      value: current.format("MM-DD-YYYY"),
+      value: current.format("YYYY-MM-DD"),
       label: current.format("dddd, DD MMM YYYY")
     };
     current.date(current.date() + 1);

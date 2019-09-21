@@ -1,8 +1,14 @@
 import axios from "axios";
 
+const root = document.getElementById("voomsway-search-root");
+const apiUrl = root.dataset.apiurl;
+const api_key = root.dataset.apikey;
+
+console.log("root.dataset ", root.dataset);
+
 // Default config options
 const defaultOptions = {
-  baseURL: "https://voomsway.herokuapp.com/api/v1",
+  baseURL: apiUrl || process.env.REACT_APP_HOST,
   headers: {}
 };
 
@@ -11,7 +17,7 @@ const axiosInstance = axios.create(defaultOptions);
 
 axiosInstance.interceptors.request.use(
   config => {
-    config.headers["x-api-key"] = process.env.REACT_APP_API_KEY;
+    config.headers["x-api-key"] = api_key || process.env.REACT_APP_API_KEY;
     return config;
   },
   error => {
