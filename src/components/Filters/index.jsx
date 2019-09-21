@@ -3,6 +3,7 @@ import queryString from "query-string";
 import PropTypes from "prop-types";
 import SelectInputField from "../common/SelectInputField";
 import { searchDateArray } from "../../utils/helpers";
+import "./filters.scss";
 
 const Filters = props => {
   const { selectWrapperDiv, terminals } = props;
@@ -17,7 +18,7 @@ const Filters = props => {
   const [destinationsOptions, setDestinationsOptions] = useState([]);
   const [tripType, setTripType] = useState("option1");
 
-  const { departure_date } = filterValues;
+  const { departure_date, destination, source } = filterValues;
 
   const handleSourceChange = (name, selected) => {
     setFilterFormValues({
@@ -64,7 +65,7 @@ const Filters = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (departure_date) {
+    if (departure_date && destination && source) {
       const result = queryString.stringify(filterValues);
       const url = `${window.location.origin}/vway/trips?${result}`;
       window.location.href = url;
@@ -167,7 +168,7 @@ const Filters = props => {
           <button
             type="submit"
             className="vm-btn-primary"
-            disabled={!departure_date}
+            disabled={!departure_date || !destination || !source}
           >
             Search Trips
           </button>

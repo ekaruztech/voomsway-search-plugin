@@ -1,0 +1,22 @@
+.vm-check-ticket-section {
+  //justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+
+  .ticket-field-input {
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #dfe8ef;
+    border-radius: 0;
+    padding:  5px 5px 5px 15px;
+    display: block;
+    outline: none;
+
+    &.active, &:active,
+    &.focus, &:focus {
+      border-color: #6EB2FB;
+    }
+  }
+}
+
+///receipt/:transactionId
