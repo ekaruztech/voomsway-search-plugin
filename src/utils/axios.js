@@ -4,8 +4,6 @@ const root = document.getElementById("voomsway-search-root");
 const apiUrl = root.dataset.apiurl;
 const api_key = root.dataset.apikey;
 
-console.log("root.dataset ", root.dataset);
-
 // Default config options
 const defaultOptions = {
   baseURL: apiUrl || process.env.REACT_APP_HOST,
