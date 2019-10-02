@@ -12,7 +12,8 @@ const SelectInputField = props => {
     error,
     value,
     onChange,
-    wrapperDivClass
+    wrapperDivClass,
+    ...restProps
   } = props;
 
   const handleSelectChange = selectedOption => {
@@ -36,6 +37,7 @@ const SelectInputField = props => {
           value={value}
           onChange={handleSelectChange}
           isDisabled={disabled}
+          {...restProps}
         />
       </div>
       {error && <div className="invalid-feedback d-block">{error}</div>}

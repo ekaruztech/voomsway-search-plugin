@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import EventListener from "react-event-listener";
 import "../styles/index.scss";
-import Filters from "./Filters";
+import "../styles/filters.scss";
 import axiosInstance from "../utils/axios";
 import { terminalsUrl } from "../utils/helpers";
+import Filters from "./Filters";
 import { TabHeader } from "./common/TabHeader";
 import CheckTicket from "./CheckTicket";
+import BusCharter from "./BusCharter";
 
 const tabs = {
   bookTrip: "book-trip",
@@ -26,9 +28,10 @@ const App = () => {
       //   axiosInstance.get(terminalsUrl),
       //   axiosInstance.get(vehicleTypesUrl)
       // ]);
+      // setVehicleTypes(vehicleTypesResult.data.data);
+
       const terminalsResult = await axiosInstance.get(terminalsUrl);
       setTerminals(terminalsResult.data.data);
-      // setVehicleTypes(vehicleTypesResult.data.data);
     } catch (error) {
       setError(true);
     }
@@ -67,6 +70,12 @@ const App = () => {
         />
         <TabHeader
           setActiveTab={setActiveTab}
+          activeStatus={activeTab === tabs.busCharter}
+          label="Bus Charter"
+          tab={tabs.busCharter}
+        />
+        <TabHeader
+          setActiveTab={setActiveTab}
           activeStatus={activeTab === tabs.checkTicket}
           label="Check Ticket"
           tab={tabs.checkTicket}
@@ -76,8 +85,14 @@ const App = () => {
         {activeTab === tabs.bookTrip && (
           <Filters terminals={terminals} selectWrapperDiv={selectWrapperDiv} />
         )}
+        {activeTab === tabs.busCharter && (
+          <BusCharter
+            terminals={terminals}
+            selectWrapperDiv={selectWrapperDiv}
+          />
+        )}
         {activeTab === tabs.checkTicket && (
-          <CheckTicket widthTicketField={ticketFieldWidth} />
+          <CheckTicket ticketFieldWidth={ticketFieldWidth} />
         )}
       </React.Fragment>
     </div>

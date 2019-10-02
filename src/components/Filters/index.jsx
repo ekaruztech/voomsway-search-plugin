@@ -3,7 +3,6 @@ import queryString from "query-string";
 import PropTypes from "prop-types";
 import SelectInputField from "../common/SelectInputField";
 import { searchDateArray } from "../../utils/helpers";
-import "./filters.scss";
 
 const Filters = props => {
   const { selectWrapperDiv, terminals } = props;
@@ -67,8 +66,7 @@ const Filters = props => {
     event.preventDefault();
     if (departure_date && destination && source) {
       const result = queryString.stringify(filterValues);
-      const url = `${window.location.origin}/vway/trips?${result}`;
-      window.location.href = url;
+      window.location.href = `${window.location.origin}/vway/trips?${result}`;
     }
   };
 

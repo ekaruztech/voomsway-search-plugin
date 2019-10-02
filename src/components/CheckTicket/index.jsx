@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "./check-ticket.scss";
 
 const CheckTicket = props => {
-  const { widthTicketField } = props;
+  const { ticketFieldWidth } = props;
   const [ticketNo, setTicketNo] = React.useState("");
 
   const onChange = event => {
@@ -24,9 +24,9 @@ const CheckTicket = props => {
         onChange={onChange}
         placeholder="Enter Booking Code"
         value={ticketNo}
-        className={`${widthTicketField} ticket-field-input`}
+        className={`${ticketFieldWidth} ticket-field-input`}
       />
-      <div className={widthTicketField}>
+      <div className={ticketFieldWidth}>
         <button
           type="submit"
           className="vm-btn-primary"
@@ -41,7 +41,7 @@ const CheckTicket = props => {
 };
 
 CheckTicket.propTypes = {
-  widthTicketField: PropTypes.string.isRequired
+  ticketFieldWidth: PropTypes.string.isRequired
 };
 
 export default CheckTicket;
