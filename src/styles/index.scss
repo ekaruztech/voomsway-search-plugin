@@ -4,6 +4,7 @@ $accent-color: #00478a;
 
 body {
   line-height: 1.5;
+  box-sizing : border-box;
 }
 
 // set background of div
@@ -116,6 +117,32 @@ body {
   }
 }
 
+.vm-ticket-section, .vm-charter-section {
+  //justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+
+  .text-field-input {
+    width: 100%;
+    font-size: 13px;
+    height: 42px;
+    border: 1px solid #dfe8ef;
+    background-color: #ffffff;
+    border-radius: 3px;
+    padding: 5px 5px 5px 10px;
+    //display: block;
+    outline: none;
+
+    &.active, &:active,
+    &.focus, &:focus {
+      border-color: #6EB2FB;
+    }
+  }
+  & input {
+    box-sizing: border-box;
+  }
+}
+
 
 .vm-select-field-3 {
   flex: 0 0 calc(25% - 9px);
@@ -123,7 +150,7 @@ body {
   margin-right: 12px;
 }
 
-.vm-select-field-3:nth-of-type(4n) {
+.vm-select-field-3:nth-child(4n) {
   margin-right: 0;
 }
 
@@ -133,7 +160,7 @@ body {
   margin-right: 12px;
 }
 
-.vm-select-field-4:nth-of-type(3n) {
+.vm-select-field-4:nth-child(3n) {
   margin-right: 0;
 }
 
@@ -143,11 +170,11 @@ body {
   margin-right: 12px;
 }
 
-.vm-select-field-6:nth-of-type(2n) {
+.vm-select-field-6:nth-child(2n) {
   margin-right: 0;
 }
 
-.vm-select-field-6:last-of-type {
+.vm-select-field-6:last-child {
   margin-right: 0;
 }
 
@@ -157,7 +184,7 @@ body {
   margin-right: 10px;
 }
 
-.vm-select-field:last-of-type {
+.vm-select-field:last-child {
   margin-right: 0;
 }
 

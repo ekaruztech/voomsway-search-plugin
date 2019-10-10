@@ -3,6 +3,7 @@ import queryString from "query-string";
 import PropTypes from "prop-types";
 import SelectInputField from "../common/SelectInputField";
 import { searchDateArray } from "../../utils/helpers";
+import "./filters.scss";
 
 const Filters = props => {
   const { selectWrapperDiv, terminals } = props;

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import EventListener from "react-event-listener";
 import "../styles/index.scss";
-import "../styles/filters.scss";
 import axiosInstance from "../utils/axios";
 import { terminalsUrl } from "../utils/helpers";
 import Filters from "./Filters";
 import { TabHeader } from "./common/TabHeader";
-import CheckTicket from "./CheckTicket";
-import BusCharter from "./BusCharter";
+import Ticket from "./Ticket";
+import Charter from "./Charter";
 
 const tabs = {
   bookTrip: "book-trip",
@@ -86,13 +85,10 @@ const App = () => {
           <Filters terminals={terminals} selectWrapperDiv={selectWrapperDiv} />
         )}
         {activeTab === tabs.busCharter && (
-          <BusCharter
-            terminals={terminals}
-            selectWrapperDiv={selectWrapperDiv}
-          />
+          <Charter selectWrapperDiv={selectWrapperDiv} />
         )}
         {activeTab === tabs.checkTicket && (
-          <CheckTicket ticketFieldWidth={ticketFieldWidth} />
+          <Ticket ticketFieldWidth={ticketFieldWidth} />
         )}
       </React.Fragment>
     </div>

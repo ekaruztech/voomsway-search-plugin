@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./check-ticket.scss";
 
-const CheckTicket = props => {
+const Ticket = props => {
   const { ticketFieldWidth } = props;
   const [ticketNo, setTicketNo] = React.useState("");
 
@@ -17,15 +16,18 @@ const CheckTicket = props => {
   };
 
   return (
-    <div className="vm-check-ticket-section">
-      <input
-        name="ticket-number"
-        type="text"
-        onChange={onChange}
-        placeholder="Enter Booking Code"
-        value={ticketNo}
-        className={`${ticketFieldWidth} ticket-field-input`}
-      />
+    <div className="vm-ticket-section">
+      <div className={ticketFieldWidth}>
+        <input
+          name="ticket-number"
+          type="text"
+          onChange={onChange}
+          placeholder="Enter Booking Code"
+          value={ticketNo}
+          className="text-field-input"
+        />
+      </div>
+
       <div className={ticketFieldWidth}>
         <button
           type="submit"
@@ -40,8 +42,8 @@ const CheckTicket = props => {
   );
 };
 
-CheckTicket.propTypes = {
+Ticket.propTypes = {
   ticketFieldWidth: PropTypes.string.isRequired
 };
 
-export default CheckTicket;
+export default Ticket;
