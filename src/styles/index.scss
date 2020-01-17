@@ -1,10 +1,11 @@
-$color-primary: #1c96d6;
-$color-info: #6EB2FB;
+$color-primary: #47b804;
+$color-info: #6eb2fb;
 $accent-color: #00478a;
 
 body {
   line-height: 1.5;
-  box-sizing : border-box;
+  box-sizing: border-box;
+  background-color: #bdc3c7;
 }
 
 // set background of div
@@ -14,6 +15,45 @@ body {
   //background-color: rgba(0, 0, 0, .5);
 }
 
+.react-tabs {
+  width: 100%;
+
+  .react-tabs__tab-list {
+    display: flex;
+    align-items: flex-end;
+    align-content: flex-start;
+    margin-bottom: 0px;
+    border: 0;
+
+    .react-tabs__tab {
+      border: 0;
+      width: 112px;
+      padding: 12px 20px;
+      text-align: center;
+      background: #eaeaea;
+      border-radius: 0;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 14px;
+      font-weight: 600;
+
+      &:focus::after {
+        display: none;
+      }
+    }
+
+    .react-tabs__tab--selected {
+      padding: 18px 30px;
+      color: $color-primary;
+      text-transform: uppercase;
+      font-size: 15px;
+      font-weight: 700;
+      // width: 112px;
+      background: #ffffff;
+      box-shadow: -10px 10px 10px 0 rgba(0, 0, 0, 0.29);
+    }
+  }
+}
+
 // div holding two checkbox
 .vm-trip-type-group {
   flex: 0 0 100%;
@@ -21,7 +61,7 @@ body {
     display: flex;
   }
 
-  input[type=radio] {
+  input[type='radio'] {
     //position: absolute;
     //clip: rect(0,0,0,0);
     //pointer-events: none;
@@ -57,7 +97,7 @@ body {
 .invalid-feedback {
   display: none;
   width: 100%;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
   font-size: 80%;
   color: #dc3545;
 }
@@ -117,7 +157,8 @@ body {
   }
 }
 
-.vm-ticket-section, .vm-charter-section {
+.vm-ticket-section,
+.vm-charter-section {
   //justify-content: center;
   display: flex;
   flex-wrap: wrap;
@@ -133,16 +174,17 @@ body {
     //display: block;
     outline: none;
 
-    &.active, &:active,
-    &.focus, &:focus {
-      border-color: #6EB2FB;
+    &.active,
+    &:active,
+    &.focus,
+    &:focus {
+      border-color: #6eb2fb;
     }
   }
   & input {
     box-sizing: border-box;
   }
 }
-
 
 .vm-select-field-3 {
   flex: 0 0 calc(25% - 9px);
@@ -191,4 +233,129 @@ body {
 .vm-select-field-12 {
   flex: 0 0 100%;
   margin-top: 10px;
+}
+
+// NEW STYLES
+
+#trip-search-group .inner {
+  padding: 15px 0;
+}
+#trip-search-group .inner .nav-pills {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-right: 1px solid #eaeaea;
+}
+#trip-search-group .inner .nav-pills .nav-link {
+  width: 112px;
+  padding: 10px 0;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+#trip-search-group .inner .nav-pills .nav-link.active {
+  padding: 10px 0;
+  font-size: 11px;
+  font-weight: 700;
+  width: 112px;
+  background: #47b804;
+  color: #ffffff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+#trip-search-group .inner .tab-content {
+  margin-top: 0;
+}
+
+#trip-search-group form {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  margin: 0 -25px;
+}
+#trip-search-group form img {
+  width: 13px;
+  margin-top: 2px !important;
+  opacity: 0.4;
+}
+#trip-search-group form .input-group {
+  border-right: 1px solid #eaeaea;
+  margin-right: 5px;
+}
+#trip-search-group form .input-group:last-child {
+  border: none;
+}
+#trip-search-group form .input-group .input-group-prepend {
+  margin-right: 0;
+}
+#trip-search-group form .input-group .input-group-prepend .input-group-text {
+  background: #ffffff;
+  text-align: left;
+  border: 0;
+  padding-left: 0;
+  min-width: 150px;
+  font-size: 14px;
+}
+#trip-search-group form .input-group .custom-select {
+  border: 0;
+  text-align: left;
+  padding-left: 0;
+  border-top: 1px solid #eaeaea;
+  font-weight: 600;
+  color: #000000;
+  font-size: 14px;
+}
+
+#trip-search-group
+  #one-way-trip
+  form
+  .input-group
+  .input-group-prepend
+  .input-group-text {
+  min-width: 200px;
+}
+
+#trip-search-group #check-ticket {
+  padding: 15px;
+  min-height: 102px;
+}
+#trip-search-group #check-ticket .inner {
+  padding: 15px;
+  margin: 0 15px;
+}
+#trip-search-group
+  #check-ticket
+  form
+  .input-group
+  .input-group-prepend
+  .input-group-text {
+  padding-left: 0.75rem;
+  min-width: auto;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #f7f7f7;
+  border: 1px solid #eaeaea;
+  margin-right: -1px;
+}
+#trip-search-group
+  #check-ticket
+  form
+  .input-group
+  .input-group-prepend
+  .input-group-text,
+#trip-search-group #check-ticket form input {
+  padding: 11px 25px;
+  height: auto;
+  border-radius: 0;
+  border-color: #eaeaea;
 }
