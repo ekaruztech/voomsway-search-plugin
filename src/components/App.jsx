@@ -13,15 +13,15 @@ import Charter from './Charter';
 const tabs = {
   bookTrip: 'book-trip',
   checkTicket: 'check-ticket',
-  busCharter: 'bus-charter',
+  busCharter: 'bus-charter'
 };
 
 const App = () => {
-  const [selectWrapperDiv, setSelectWrapperDiv] = useState('vm-select-field');
-  const [ticketFieldWidth, setTicketFieldDiv] = useState('vm-select-field-4');
-  const [error, setError] = useState(false);
-  const [terminals, setTerminals] = useState([]);
-  const [activeTab, setActiveTab] = useState(tabs.bookTrip);
+  const [ selectWrapperDiv, setSelectWrapperDiv ] = useState('vm-select-field');
+  const [ ticketFieldWidth, setTicketFieldDiv ] = useState('vm-select-field-4');
+  const [ error, setError ] = useState(false);
+  const [ terminals, setTerminals ] = useState([]);
+  const [ activeTab, setActiveTab ] = useState(tabs.bookTrip);
 
   const fetchResources = async () => {
     try {
@@ -62,20 +62,18 @@ const App = () => {
   return (
     <div className="vm-voomsway-filter">
       <EventListener target="window" onResize={handleResize} />
-      <div className="vm-tab-section">
-        <Tabs>
+      <div className="vm-tab-container">
+        <Tabs className="vm-main-tab">
           <TabList>
             <Tab>Book Trip</Tab>
             <Tab>Check Ticket</Tab>
           </TabList>
 
           <TabPanel>
-            <div>
-              <h2 style={{ border: '1px solid #000' }}>Any content 1</h2>
-            </div>
+            <Filters />
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <Ticket />
           </TabPanel>
         </Tabs>
       </div>

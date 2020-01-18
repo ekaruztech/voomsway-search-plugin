@@ -1,185 +1,100 @@
-import React, { useState } from "react";
-import queryString from "query-string";
-import PropTypes from "prop-types";
-import SelectInputField from "../common/SelectInputField";
-import { searchDateArray } from "../../utils/helpers";
-import "./filters.scss";
+import React from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import SelectInputField from '../common/SelectInputField';
+import { searchDateArray } from '../../utils/helpers';
 
-const Filters = props => {
-  const { selectWrapperDiv, terminals } = props;
-  const defaultFormValues = {
-    source: null,
-    vehicle_type: null,
-    destination: null,
-    departure_date: null
-  };
-  const [filterFormValues, setFilterFormValues] = useState(defaultFormValues); // react select object values
-  const [filterValues, setFilterValues] = useState({}); // what to send
-  const [destinationsOptions, setDestinationsOptions] = useState([]);
-  const [tripType, setTripType] = useState("option1");
+import 'react-tabs/style/react-tabs.scss';
 
-  const { departure_date, destination, source } = filterValues;
-
-  const handleSourceChange = (name, selected) => {
-    setFilterFormValues({
-      ...filterFormValues,
-      [name]: selected,
-      destination: null
-    });
-    setFilterValues({
-      ...filterValues,
-      [name]: selected ? selected.value : null,
-      destination: null
-    });
-
-    // fill destinations
-    if (selected) {
-      const { value: _id } = selected;
-      const terminal = terminals.find(terminal => terminal._id === _id);
-      if (terminal) {
-        const { destinations } = terminal;
-        let destinationObjs = [];
-        if (destinations && destinations.length) {
-          destinationObjs = terminals.filter(terminal =>
-            destinations.includes(terminal._id)
-          );
-        }
-        setDestinationsOptions(destinationObjs);
-      }
-    } else {
-      setDestinationsOptions([]);
-    }
-  };
-
-  const handleChange = (name, selectedOption) => {
-    setFilterFormValues({ ...filterFormValues, [name]: selectedOption });
-    setFilterValues({
-      ...filterValues,
-      [name]: selectedOption ? selectedOption.value : null
-    });
-  };
-
-  const tripTypeOnchange = event => {
-    setTripType(event.target.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    if (departure_date && destination && source) {
-      const result = queryString.stringify(filterValues);
-      window.location.href = `${window.location.origin}/vway/trips?${result}`;
-    }
-  };
-
-  // const passengerList = Array.from({ length: 10 }, (v, k) => k + 1);
-  return (
-    <form onSubmit={handleSubmit} className="vm-filter-form">
-      <div className="vm-trip-type-group">
-        <div>
-          <label
-            className={`vm-checkbox-label ${
-              "option1" === tripType ? "active" : ""
-            }`}
-          >
-            <input
-              type="radio"
-              name="options"
-              value="option1"
-              onChange={tripTypeOnchange}
-              checked={"option1" === tripType}
-            />
-            One Way
-          </label>
-          <label
-            className={`vm-checkbox-label ${
-              "option2" === tripType ? "active" : ""
-            }`}
-          >
-            <input
-              type="radio"
-              name="options"
-              value="option2"
-              onChange={tripTypeOnchange}
-              checked={"option2" === tripType}
-            />
-            Round Trip
-          </label>
-        </div>
-      </div>
-
-      <div className="vm-filter-fields-section">
+const Filters = () => {
+  const renderRoundTripForm = option => {
+    return (
+      <form className="vm-filter-form">
         <SelectInputField
-          wrapperDivClass={selectWrapperDiv}
           name="source"
-          placeholder="- Departure Terminal -"
+          label="Departure Terminal"
+          iconName="departure"
           isSearchable
-          onChange={handleSourceChange}
-          options={terminals.map(
-            item =>
-              item &&
-              item.location && {
-                label: `${item.location.city},${item.location.state}`,
-                value: item._id
-              }
-          )}
-          value={filterFormValues.source}
+          // onChange={handleSourceChange}
+          // options={terminals.map(
+          //   item =>
+          //     item &&
+          //     item.location && {
+          //       label: `${item.location.city},${item.location.state}`,
+          //       value: item._id,
+          //     }
+          // )}
+          // value={filterFormValues.source}
         />
 
         <SelectInputField
-          wrapperDivClass={selectWrapperDiv}
+          // wrapperDivClass={selectWrapperDiv}
           name="destination"
-          placeholder="- Destination Terminal -"
+          label="Destination Terminal"
+          iconName="destination"
           isSearchable
-          onChange={handleChange}
-          disabled={!destinationsOptions.length}
-          options={destinationsOptions.map(
-            item =>
-              item &&
-              item.location && {
-                label: `${item.location.city}, ${item.location.state}`,
-                value: item._id
-              }
-          )}
-          value={filterFormValues.destination}
+          // onChange={handleChange}
+          // disabled={!destinationsOptions.length}
+          // options={destinationsOptions.map(
+          //   item =>
+          //     item &&
+          //     item.location && {
+          //       label: `${item.location.city}, ${item.location.state}`,
+          //       value: item._id,
+          //     }
+          // )}
+          // value={filterFormValues.destination}
         />
 
         <SelectInputField
-          wrapperDivClass={selectWrapperDiv}
+          // wrapperDivClass={selectWrapperDiv}
           name="departure_date"
-          placeholder="- Departure Date -"
-          onChange={handleChange}
+          label="Departure Date"
+          iconName="calendar"
+          // onChange={handleChange}
           options={searchDateArray(7)}
-          value={filterFormValues.departure_date}
+          // value={filterFormValues.departure_date}
         />
 
-        {"option2" === tripType && (
+        {option === 'option1' && (
           <SelectInputField
-            wrapperDivClass={selectWrapperDiv}
+            //   wrapperDivClass={selectWrapperDiv}
             name="arrival_date"
-            placeholder="- Arrival Date -"
-            onChange={handleChange}
+            label="Arrival Date"
+            iconName="calendar"
+            //   onChange={handleChange}
             options={searchDateArray(7)}
-            value={filterFormValues.arrival_date}
+            //   value={filterFormValues.arrival_date}
           />
         )}
 
-        <div className={selectWrapperDiv}>
-          <button
-            type="submit"
-            className="vm-btn-primary"
-            disabled={!departure_date || !destination || !source}
-          >
-            Search Trips
-          </button>
+        <div className="selectbox-container">
+          <div>
+            <button
+              type="submit"
+              className="vm-submit-btn"
+              //   disabled={!departure_date || !destination || !source}
+            >
+              Book Trip
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
-  );
-};
+      </form>
+    );
+  };
 
-Filters.propTypes = {
-  selectWrapperDiv: PropTypes.string.isRequired,
-  terminals: PropTypes.arrayOf(PropTypes.object).isRequired
+  return (
+    <div className="vm-filters-container">
+      <Tabs className="vm-filters-tab">
+        <TabList>
+          <Tab>Round Trip</Tab>
+          <Tab>one way trip</Tab>
+        </TabList>
+
+        <TabPanel>{renderRoundTripForm('option1')}</TabPanel>
+        <TabPanel>{renderRoundTripForm('option2')}</TabPanel>
+      </Tabs>
+    </div>
+  );
 };
 
 export default Filters;

@@ -16,8 +16,9 @@ const Ticket = props => {
   };
 
   return (
-    <div className="vm-ticket-section">
-      <div className={ticketFieldWidth}>
+    <div className="vm-ticket-container">
+      <div className={ ticketFieldWidth }>
+        <label htmlFor="">Booking Reference</label>
         <input
           name="ticket-number"
           type="text"
