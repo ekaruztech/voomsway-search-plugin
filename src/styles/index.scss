@@ -11,7 +11,7 @@ body {
 // set background of div
 .vm-voomsway-filter {
   font-family: 'OpenSans', sans-serif;
-  padding: 33px 33px 33px 33px;
+  // padding: 33px 33px 33px 33px;
   //background-color: rgba(0, 0, 0, .5);
 }
 
@@ -40,6 +40,10 @@ body {
       &:focus::after {
         display: none;
       }
+
+      @media (max-width: 766px) {
+        width: 100%;
+      }
     }
 
     .react-tabs__tab--selected {
@@ -48,10 +52,14 @@ body {
       text-transform: uppercase;
       font-size: 15px;
       font-weight: 700;
-      // width: 112px;
       background: #ffffff;
       box-shadow: -10px 10px 10px 0 rgba(0, 0, 0, 0.29);
       transition: all 0.3s linear;
+
+      @media (max-width: 766px) {
+        font-size: 14px;
+        padding: 18px 1em;
+      }
     }
   }
 
@@ -61,15 +69,30 @@ body {
     .vm-filters-tab {
       display: flex;
 
+      @media (max-width: 766px) {
+        display: block;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+      }
+
       .react-tabs__tab-list {
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 20px 30px;
 
+        @media (max-width: 766px) {
+          margin: 2em;
+        }
+
         .react-tabs__tab {
           font-size: 11px;
           padding: 10px 0;
+
+          @media (max-width: 766px) {
+            padding: 1.2em 0;
+            font-size: 12px;
+          }
         }
 
         .react-tabs__tab--selected {
@@ -80,6 +103,11 @@ body {
           font-weight: 600;
           background: $color-primary;
           box-shadow: none;
+
+          @media (max-width: 766px) {
+            padding: 1.2em 0;
+            font-size: 12px;
+          }
         }
       }
 
@@ -91,6 +119,10 @@ body {
           flex-grow: 1;
           height: 100%;
 
+          @media (max-width: 766px) {
+            display: block;
+          }
+
           .selectbox-container {
             display: flex;
             flex-direction: column;
@@ -99,6 +131,18 @@ body {
             margin: 20px 0;
             padding: 0 2em;
             border-left: 1px solid rgb(234, 234, 234);
+
+            @media (max-width: 766px) {
+              border: 1px solid rgb(234, 234, 234);
+              margin: 1em 2em;
+              padding: 1em;
+            }
+
+            &.vm-filters-submit-btn-wrap {
+              @media (max-width: 766px) {
+                border: 0;
+              }
+            }
 
             .react-select__control {
               border-radius: 0;
@@ -117,6 +161,7 @@ body {
             .vm-form-label {
               padding: 0.4em;
               padding-left: 0;
+              font-size: 0.9rem;
 
               .label-icon {
                 margin-right: 0.5em;
@@ -143,12 +188,23 @@ body {
     flex-grow: 0;
     cursor: pointer;
     border: 0;
+
+    @media (max-width: 766px) {
+      display: block;
+      width: 100%;
+      padding: 1.5em 20px;
+    }
   }
 
   .vm-ticket-container {
     background-color: #fff;
     display: flex;
     padding: 1.5em 3em;
+
+    @media (max-width: 766px) {
+      display: block;
+      padding: 3em;
+    }
 
     .input-container {
       border: 1px solid rgb(234, 234, 234);
@@ -157,29 +213,58 @@ body {
       align-items: center;
       margin-right: 1em;
 
+      @media (max-width: 766px) {
+        flex-direction: column;
+        margin: 0;
+      }
+
       label {
         padding: 11px 25px;
         background-color: rgb(247, 247, 247);
+
+        @media (max-width: 766px) {
+          padding: 1em 0;
+          padding-left: 1em;
+          width: 100%;
+          box-sizing: border-box;
+        }
       }
 
       .input-control {
-        // padding: 0;
         padding: 0 25px;
         height: 100%;
         border: 0;
         font-size: 1rem;
+
+        @media (max-width: 766px) {
+          padding: 1em 0;
+          padding-left: 1em;
+          width: 100%;
+          box-sizing: border-box;
+        }
       }
     }
 
-    .vm-submit-btn-wrap {
+    .vm-ticket-submit-btn-wrap {
       border-left: 1px solid rgb(234, 234, 234);
       padding-left: 1em;
+
+      @media (max-width: 766px) {
+        padding: 0;
+        border: 0;
+      }
 
       .vm-submit-btn {
         // height: auto;
         position: relative;
         top: 50%;
         transform: translateY(-50%);
+
+        @media (max-width: 766px) {
+          margin-top: 1em;
+          top: 0;
+          transform: none;
+        }
       }
     }
   }

@@ -29,7 +29,7 @@ const Ticket = props => {
         />
       </div>
 
-      <div className="vm-submit-btn-wrap">
+      <div className="vm-ticket-submit-btn-wrap">
         <button type="submit" className="vm-submit-btn" onClick={checkTicket} disabled={!ticketNo}>
           Search Ticket
         </button>

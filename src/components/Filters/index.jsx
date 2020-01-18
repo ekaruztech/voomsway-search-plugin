@@ -67,7 +67,7 @@ const Filters = () => {
           />
         )}
 
-        <div className="selectbox-container">
+        <div className="selectbox-container vm-filters-submit-btn-wrap">
           <div>
             <button
               type="submit"
