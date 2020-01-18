@@ -89,7 +89,6 @@ const Filters = () => {
           <Tab>Round Trip</Tab>
           <Tab>one way trip</Tab>
         </TabList>
-
         <TabPanel>{renderRoundTripForm('option1')}</TabPanel>
         <TabPanel>{renderRoundTripForm('option2')}</TabPanel>
       </Tabs>
