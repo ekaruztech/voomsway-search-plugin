@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Ticket = props => {
   const { ticketFieldWidth } = props;
-  const [ticketNo, setTicketNo] = React.useState("");
+  const [ ticketNo, setTicketNo ] = React.useState('');
 
   const onChange = event => {
     setTicketNo(event.target.value);
@@ -17,26 +17,21 @@ const Ticket = props => {
 
   return (
     <div className="vm-ticket-container">
-      <div className={ ticketFieldWidth }>
+      <div className="input-container">
         <label htmlFor="">Booking Reference</label>
         <input
           name="ticket-number"
           type="text"
           onChange={onChange}
-          placeholder="Enter Booking Code"
+          placeholder="Type in here"
           value={ticketNo}
-          className="text-field-input"
+          className="input-control"
         />
       </div>
 
-      <div className={ticketFieldWidth}>
-        <button
-          type="submit"
-          className="vm-btn-primary"
-          onClick={checkTicket}
-          disabled={!ticketNo}
-        >
-          Search
+      <div className="vm-submit-btn-wrap">
+        <button type="submit" className="vm-submit-btn" onClick={checkTicket} disabled={!ticketNo}>
+          Search Ticket
         </button>
       </div>
     </div>

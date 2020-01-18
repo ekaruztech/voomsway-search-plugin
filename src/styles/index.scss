@@ -35,6 +35,7 @@ body {
       color: rgba(0, 0, 0, 0.5);
       font-size: 14px;
       font-weight: 600;
+      transition: all 0.3s linear;
 
       &:focus::after {
         display: none;
@@ -50,6 +51,7 @@ body {
       // width: 112px;
       background: #ffffff;
       box-shadow: -10px 10px 10px 0 rgba(0, 0, 0, 0.29);
+      transition: all 0.3s linear;
     }
   }
 
@@ -66,15 +68,15 @@ body {
         margin: 20px 30px;
 
         .react-tabs__tab {
-          font-size: 12px;
-          padding: 12px 10px;
+          font-size: 11px;
+          padding: 10px 0;
         }
 
         .react-tabs__tab--selected {
-          padding: 12px 10px;
+          padding: 10px 0;
           color: #ffffff;
           text-transform: uppercase;
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 600;
           background: $color-primary;
           box-shadow: none;
@@ -105,7 +107,7 @@ body {
             }
 
             .react-select__control--is-focused {
-              box-shadow: none
+              box-shadow: none;
             }
 
             .react-select__indicator-separator {
@@ -123,22 +125,61 @@ body {
                 margin-top: 2px !important;
               }
             }
-
-            .vm-submit-btn {
-              color: rgb(255, 255, 255);
-              text-transform: uppercase;
-              font-weight: 700;
-              font-size: 13px;
-              background: rgb(71, 184, 4);
-              padding: 10px 20px;
-              border-radius: 0px;
-              transition: all 0.3s linear 0s;
-              flex-grow: 0;
-              cursor: pointer;
-              border: 0;
-            }
           }
         }
+      }
+    }
+  }
+
+  .vm-submit-btn {
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 13px;
+    background: rgb(71, 184, 4);
+    padding: 10px 20px;
+    border-radius: 0px;
+    transition: all 0.3s linear 0s;
+    flex-grow: 0;
+    cursor: pointer;
+    border: 0;
+  }
+
+  .vm-ticket-container {
+    background-color: #fff;
+    display: flex;
+    padding: 1.5em 3em;
+
+    .input-container {
+      border: 1px solid rgb(234, 234, 234);
+      display: flex;
+      flex-basis: fill;
+      align-items: center;
+      margin-right: 1em;
+
+      label {
+        padding: 11px 25px;
+        background-color: rgb(247, 247, 247);
+      }
+
+      .input-control {
+        // padding: 0;
+        padding: 0 25px;
+        height: 100%;
+        border: 0;
+        font-size: 1rem;
+      }
+    }
+
+    .vm-submit-btn-wrap {
+      border-left: 1px solid rgb(234, 234, 234);
+      padding-left: 1em;
+
+      .vm-submit-btn {
+        // height: auto;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
