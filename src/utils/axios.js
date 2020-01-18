@@ -16,6 +16,7 @@ const axiosInstance = axios.create(defaultOptions);
 axiosInstance.interceptors.request.use(
   config => {
     config.headers["x-api-key"] = api_key || process.env.REACT_APP_API_KEY;
+    config.headers["x-access-token"] = api_key || process.env.REACT_APP_API_TOKEN;
     return config;
   },
   error => {

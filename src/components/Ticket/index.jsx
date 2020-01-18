@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Ticket = props => {
-  const { ticketFieldWidth } = props;
   const [ ticketNo, setTicketNo ] = React.useState('');
 
   const onChange = event => {
@@ -39,7 +38,7 @@ const Ticket = props => {
 };
 
 Ticket.propTypes = {
-  ticketFieldWidth: PropTypes.string.isRequired
+  // ticketFieldWidth: PropTypes.string.isRequired
 };
 
 export default Ticket;

@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.scss';
 import '../styles/index.scss';
 import axiosInstance from '../utils/axios';
-import { terminalsUrl } from '../utils/helpers';
+import { travelPathsUrl } from '../utils/helpers';
 import Filters from './Filters';
 import { TabHeader } from './common/TabHeader';
 import Ticket from './Ticket';
@@ -31,7 +31,7 @@ const App = () => {
       // ]);
       // setVehicleTypes(vehicleTypesResult.data.data);
 
-      const terminalsResult = await axiosInstance.get(terminalsUrl);
+      const terminalsResult = await axiosInstance.get(travelPathsUrl);
       setTerminals(terminalsResult.data.data);
     } catch (error) {
       setError(true);

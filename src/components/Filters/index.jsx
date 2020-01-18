@@ -1,79 +1,113 @@
-import React from 'react';
+import React, { useState } from 'react';
+import queryString from 'query-string';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SelectInputField from '../common/SelectInputField';
 import { searchDateArray } from '../../utils/helpers';
 
 import 'react-tabs/style/react-tabs.scss';
 
-const Filters = () => {
+const Filters = props => {
+  const { terminals } = props;
+
+  const defaultFormValues = {
+    source: null,
+    arrival_date: null,
+    destination: null,
+    departure_date: null
+  };
+  const [ tripType, setTripType ] = useState('');
+  const [ formValues, setFormValues ] = useState(defaultFormValues);
+  const { departure_date, destination, source } = formValues;
+
+  const dropdownOptions = () => {
+    const formatTerminalOption =
+      terminals &&
+      terminals.map(
+        terminal =>
+          terminal &&
+          terminal.location && {
+            label: `${terminal.location.city},${terminal.location.state}`,
+            value: terminal._id
+          }
+      );
+
+    const filteredOptions =
+      formatTerminalOption &&
+      formatTerminalOption.filter(item => {
+        if (item.value === (formValues.source || formValues.destination)) {
+          return null;
+        }
+
+        return item;
+      });
+
+    return filteredOptions;
+  };
+
+  const handleChange = (name, selectedOption) => {
+    setFormValues({ ...formValues, [name]: selectedOption });
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    let filterFormValues = {};
+
+    if (tripType === 'roundTrip') {
+      filterFormValues = { ...formValues, arrival_date: null };
+    }
+
+    if (departure_date && destination && source) {
+      const result = queryString.stringify(filterFormValues);
+      window.location.href = `${window.location.origin}/vway/trips?${result}`;
+    }
+  };
+
   const renderRoundTripForm = option => {
     return (
-      <form className="vm-filter-form">
+      <form onSubmit={handleSubmit} className="vm-filter-form">
         <SelectInputField
           name="source"
           label="Departure Terminal"
           iconName="departure"
           isSearchable
-          // onChange={handleSourceChange}
-          // options={terminals.map(
-          //   item =>
-          //     item &&
-          //     item.location && {
-          //       label: `${item.location.city},${item.location.state}`,
-          //       value: item._id,
-          //     }
-          // )}
-          // value={filterFormValues.source}
+          onChange={handleChange}
+          options={dropdownOptions()}
+          value={formValues.source}
         />
 
         <SelectInputField
-          // wrapperDivClass={selectWrapperDiv}
           name="destination"
           label="Destination Terminal"
           iconName="destination"
           isSearchable
-          // onChange={handleChange}
-          // disabled={!destinationsOptions.length}
-          // options={destinationsOptions.map(
-          //   item =>
-          //     item &&
-          //     item.location && {
-          //       label: `${item.location.city}, ${item.location.state}`,
-          //       value: item._id,
-          //     }
-          // )}
-          // value={filterFormValues.destination}
+          onChange={handleChange}
+          options={dropdownOptions()}
+          value={formValues.destination}
         />
 
         <SelectInputField
-          // wrapperDivClass={selectWrapperDiv}
           name="departure_date"
           label="Departure Date"
           iconName="calendar"
-          // onChange={handleChange}
+          onChange={handleChange}
           options={searchDateArray(7)}
-          // value={filterFormValues.departure_date}
+          value={formValues.departure_date}
         />
 
         {option === 'option1' && (
           <SelectInputField
-            //   wrapperDivClass={selectWrapperDiv}
             name="arrival_date"
             label="Arrival Date"
             iconName="calendar"
-            //   onChange={handleChange}
+            onChange={handleChange}
             options={searchDateArray(7)}
-            //   value={filterFormValues.arrival_date}
+            value={formValues.arrival_date}
           />
         )}
 
         <div className="selectbox-container vm-filters-submit-btn-wrap">
           <div>
-            <button
-              type="submit"
-              className="vm-submit-btn"
-              //   disabled={!departure_date || !destination || !source}
-            >
+            <button type="submit" className="vm-submit-btn" disabled={!departure_date || !destination || !source}>
               Book Trip
             </button>
           </div>
@@ -84,7 +118,14 @@ const Filters = () => {
 
   return (
     <div className="vm-filters-container">
-      <Tabs className="vm-filters-tab">
+      <Tabs
+        onSelect={index => {
+          const tripList = [ 'roundTrip', 'oneWayTrip' ];
+
+          setTripType(tripList[index]);
+        }}
+        className="vm-filters-tab"
+      >
         <TabList>
           <Tab>Round Trip</Tab>
           <Tab>one way trip</Tab>
