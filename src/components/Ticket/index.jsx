@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container, Row, Col } from 'reactstrap';
 
 const Ticket = props => {
-  const [ ticketNo, setTicketNo ] = React.useState('');
+  const [ticketNo, setTicketNo] = React.useState('');
 
   const onChange = event => {
     setTicketNo(event.target.value);
@@ -15,25 +16,37 @@ const Ticket = props => {
   };
 
   return (
-    <div className="vm-ticket-container">
-      <div className="input-container">
-        <label htmlFor="">Booking Reference</label>
-        <input
-          name="ticket-number"
-          type="text"
-          onChange={onChange}
-          placeholder="Type in here"
-          value={ticketNo}
-          className="input-control"
-        />
-      </div>
+    <Container fluid>
+      <Row className="vm-ticket-container">
+        <Col md="5" className="input-container d-flex px-0 mr-3">
+          <label
+            htmlFor=""
+            className="d-flex justify-content-center align-items-center"
+          >
+            Booking Reference
+          </label>
+          <input
+            name="ticket-number"
+            type="text"
+            onChange={onChange}
+            placeholder="Type in here"
+            value={ticketNo}
+            className="input-control"
+          />
+        </Col>
 
-      <div className="vm-ticket-submit-btn-wrap">
-        <button type="submit" className="vm-submit-btn" onClick={checkTicket} disabled={!ticketNo}>
-          Search Ticket
-        </button>
-      </div>
-    </div>
+        <Col className="vm-ticket-submit-btn-wrap divider">
+          <button
+            type="submit"
+            className="vm-submit-btn"
+            onClick={checkTicket}
+            disabled={!ticketNo}
+          >
+            Search Ticket
+          </button>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

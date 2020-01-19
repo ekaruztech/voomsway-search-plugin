@@ -6,6 +6,7 @@ import DayPickerInputField from '../common/DayPickerInputField';
 import { searchDateArray } from '../../utils/helpers';
 
 import 'react-tabs/style/react-tabs.scss';
+import { Container, Row, Col } from 'reactstrap';
 
 const Filters = props => {
   const { travelPaths } = props;
@@ -16,7 +17,7 @@ const Filters = props => {
     destination: null,
     departure_date: '',
   };
-  
+
   const [tripType, setTripType] = useState('roundTrip');
   const [destinationsOptions, setDestinationsOptions] = useState([]);
   const [formValues, setFormValues] = useState(defaultFormValues);
@@ -110,63 +111,71 @@ const Filters = props => {
   const renderRoundTripForm = option => {
     return (
       <form onSubmit={handleSubmit} className="vm-filter-form">
-        <SelectInputField
-          name="source"
-          label="Departure Terminal"
-          iconName="departure"
-          isSearchable
-          onChange={handleSourceChange}
-          options={sourceDropdownOptions()}
-          value={formValues.source}
-        />
-
-        <SelectInputField
-          name="destination"
-          label="Destination Terminal"
-          iconName="destination"
-          isSearchable
-          onChange={handleChange}
-          disabled={!destinationsOptions.length}
-          options={destinationsOptions}
-          value={formValues.destination}
-        />
-
-        <DayPickerInputField
-          name="departure_date"
-          label="Departure Date"
-          iconName="calendar"
-          onChange={handleChange}
-          options={searchDateArray(7)}
-          value={formValues.departure_date}
-        />
-
-        {option === 'option1' && (
-          <DayPickerInputField
-            name="arrival_date"
-            label="Arrival Date"
-            iconName="calendar"
-            onChange={handleChange}
-            options={searchDateArray(7)}
-            value={formValues.arrival_date}
-          />
-        )}
-
-        <div className="selectbox-container vm-filters-submit-btn-wrap">
-          <div>
-            <button
-              type="submit"
-              className="vm-submit-btn"
-              disabled={
-                !departure_date ||
-                !destination ||
-                !source ||
-                (tripType === 'roundTrip' && !arrival_date)
-              }
-            >
-              Book Trip
-            </button>
-          </div>
-        </div>
+        <Container fluid>
+          <Row>
+            <Col className="divider">
+              <SelectInputField
+                name="source"
+                label="Departure Terminal"
+                iconName="departure"
+                isSearchable
+                onChange={handleSourceChange}
+                options={sourceDropdownOptions()}
+                value={formValues.source}
+              />
+            </Col>
+            <Col className="divider">
+              <SelectInputField
+                name="destination"
+                label="Destination Terminal"
+                iconName="destination"
+                isSearchable
+                onChange={handleChange}
+                disabled={!destinationsOptions.length}
+                options={destinationsOptions}
+                value={formValues.destination}
+              />
+            </Col>
+            <Col className="divider">
+              <DayPickerInputField
+                name="departure_date"
+                label="Departure Date"
+                iconName="calendar"
+                onChange={handleChange}
+                options={searchDateArray(7)}
+                value={formValues.departure_date}
+              />
+            </Col>
+            {option === 'option1' && (
+              <Col className="divider">
+                <DayPickerInputField
+                  name="arrival_date"
+                  label="Arrival Date"
+                  iconName="calendar"
+                  onChange={handleChange}
+                  options={searchDateArray(7)}
+                  value={formValues.arrival_date}
+                />
+              </Col>
+            )}
+            <Col className="divider d-flex align-items-center">
+              <div className="vm-filters-submit-btn-wrap">
+                <button
+                  type="submit"
+                  className="vm-submit-btn"
+                  disabled={
+                    !departure_date ||
+                    !destination ||
+                    !source ||
+                    (tripType === 'roundTrip' && !arrival_date)
+                  }
+                >
+                  Book Trip
+                </button>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </form>
     );
   };
@@ -174,6 +183,7 @@ const Filters = props => {
   return (
     <div className="vm-filters-container">
       <Tabs
+        defaultIndex={1}
         onSelect={index => {
           const tripList = ['roundTrip', 'oneWayTrip'];
 
@@ -181,12 +191,23 @@ const Filters = props => {
         }}
         className="vm-filters-tab"
       >
-        <TabList>
-          <Tab>Round Trip</Tab>
-          <Tab>one way trip</Tab>
-        </TabList>
-        <TabPanel>{renderRoundTripForm('option1')}</TabPanel>
-        <TabPanel>{renderRoundTripForm('option2')}</TabPanel>
+        <Container fluid className="py-3">
+          <Row>
+            <Col
+              md="2"
+              className="m-0 d-flex justify-content-center align-items-center"
+            >
+              <TabList>
+                <Tab>Round Trip</Tab>
+                <Tab>one way trip</Tab>
+              </TabList>
+            </Col>
+            <Col md="10" className="p-0">
+              <TabPanel>{renderRoundTripForm('option1')}</TabPanel>
+              <TabPanel>{renderRoundTripForm('option2')}</TabPanel>
+            </Col>
+          </Row>
+        </Container>
       </Tabs>
     </div>
   );

@@ -23,7 +23,7 @@ const DayPickerInputField = props => {
   const renderIcon = iconName => (
     <img
       className="label-icon"
-      src={`./images/icons/${iconName}.svg`}
+      src={`./assets/icons/${iconName}.svg`}
       alt="calendar icon"
     />
   );

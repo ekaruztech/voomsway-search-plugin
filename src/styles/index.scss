@@ -3,14 +3,14 @@ $color-info: #6eb2fb;
 $accent-color: #00478a;
 
 body {
-  line-height: 1.5;
-  box-sizing: border-box;
-  background-color: #bdc3c7;
+  background: #bdc3c7 !important;
 }
 
 // set background of div
 .vm-voomsway-filter {
   font-family: 'OpenSans', sans-serif;
+  // max-width: 1140px;
+  // margin: 0 auto;
 }
 
 .vm-main-tab {
@@ -24,7 +24,7 @@ body {
 
     .react-tabs__tab {
       border: 0;
-      width: 112px;
+      width: 168px;
       padding: 12px 20px;
       text-align: center;
       background: #eaeaea;
@@ -52,6 +52,7 @@ body {
       background: #ffffff;
       box-shadow: -10px 10px 10px 0 rgba(0, 0, 0, 0.29);
       transition: all 0.3s linear;
+      width: 180px;
 
       @media (max-width: 766px) {
         font-size: 14px;
@@ -76,7 +77,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin: 20px 30px;
+        margin: 0;
 
         @media (max-width: 766px) {
           margin: 2em;
@@ -85,6 +86,7 @@ body {
         .react-tabs__tab {
           font-size: 11px;
           padding: 10px 0;
+          width: 112px;
 
           @media (max-width: 766px) {
             padding: 1.2em 0;
@@ -126,9 +128,6 @@ body {
             flex-direction: column;
             justify-content: center;
             flex-grow: 1;
-            margin: 20px 0;
-            padding: 0 2em;
-            border-left: 1px solid rgb(234, 234, 234);
 
             @media (max-width: 766px) {
               border: 1px solid rgb(234, 234, 234);
@@ -149,6 +148,8 @@ body {
                 box-sizing: border-box;
                 border-radius: 0;
                 font-size: 14px;
+                color: #000000;
+                font-weight: 600;
               }
             }
 
@@ -156,7 +157,9 @@ body {
               border-radius: 0;
               border: 0;
               border-top: 1px solid rgb(234, 234, 234);
+              color: #000000;
               font-size: 14px;
+              font-weight: 600;
             }
 
             .react-select__control--is-focused {
@@ -170,8 +173,9 @@ body {
             .vm-form-label {
               padding: 0.4em;
               padding-left: 0;
-              font-size: 0.9rem;
-              opacity: 0.5;
+              font-size: 14px;
+              font-weight: 300;
+              color: #495057;
 
               .label-icon {
                 margin-right: 0.5em;
@@ -183,6 +187,10 @@ body {
         }
       }
     }
+  }
+
+  .divider {
+    border-left: 1px solid rgb(234, 234, 234);
   }
 
   .vm-submit-btn {
@@ -222,10 +230,8 @@ body {
 
     .input-container {
       border: 1px solid rgb(234, 234, 234);
-      display: flex;
-      flex-basis: fill;
-      align-items: center;
-      margin-right: 1em;
+      flex-grow: 1;
+      flex-basis: 0;
 
       @media (max-width: 766px) {
         flex-direction: column;
@@ -235,6 +241,11 @@ body {
       label {
         padding: 11px 25px;
         background-color: rgb(247, 247, 247);
+        height: 100%;
+        width: 100%;
+        border-radius: 0;
+        border-color: #eaeaea;
+        color: #495057;
 
         @media (max-width: 766px) {
           padding: 1em 0;
@@ -246,9 +257,11 @@ body {
 
       .input-control {
         padding: 0 25px;
+        width: 100%;
         height: 100%;
         border: 0;
-        font-size: 1rem;
+        font-size: 14px;
+        font-weight: 600;
 
         @media (max-width: 766px) {
           padding: 1em 0;
