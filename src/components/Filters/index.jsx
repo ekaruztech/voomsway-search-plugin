@@ -2,62 +2,107 @@ import React, { useState } from 'react';
 import queryString from 'query-string';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SelectInputField from '../common/SelectInputField';
+import DayPickerInputField from '../common/DayPickerInputField';
 import { searchDateArray } from '../../utils/helpers';
 
 import 'react-tabs/style/react-tabs.scss';
 
 const Filters = props => {
-  const { terminals } = props;
+  const { travelPaths } = props;
 
   const defaultFormValues = {
     source: null,
-    arrival_date: null,
+    arrival_date: '',
     destination: null,
-    departure_date: null
+    departure_date: '',
   };
-  const [ tripType, setTripType ] = useState('');
-  const [ formValues, setFormValues ] = useState(defaultFormValues);
-  const { departure_date, destination, source } = formValues;
+  
+  const [tripType, setTripType] = useState('roundTrip');
+  const [destinationsOptions, setDestinationsOptions] = useState([]);
+  const [formValues, setFormValues] = useState(defaultFormValues);
+  const [filterValues, setFilterValues] = useState({});
+  const { arrival_date, departure_date, destination, source } = formValues;
 
-  const dropdownOptions = () => {
-    const formatTerminalOption =
-      terminals &&
-      terminals.map(
-        terminal =>
-          terminal &&
-          terminal.location && {
-            label: `${terminal.location.city},${terminal.location.state}`,
-            value: terminal._id
-          }
-      );
+  const sourceDropdownOptions = () =>
+    travelPaths &&
+    travelPaths.map(
+      travelPath =>
+        travelPath &&
+        travelPath.source && {
+          value: travelPath._id,
+          label: `${travelPath.source.location}`,
+        }
+    );
 
-    const filteredOptions =
-      formatTerminalOption &&
-      formatTerminalOption.filter(item => {
-        if (item.value === (formValues.source || formValues.destination)) {
-          return null;
+  const handleSourceChange = (name, selectedOption) => {
+    setFormValues({
+      ...formValues,
+      [name]: selectedOption,
+      destination: null,
+    });
+
+    setFilterValues({
+      ...filterValues,
+      [name]: selectedOption ? selectedOption.label : null,
+      destination: null,
+    });
+
+    if (selectedOption) {
+      const { value: _id } = selectedOption;
+      const travelPath = travelPaths.find(terminal => terminal._id === _id);
+      if (travelPath) {
+        const { destination, path } = travelPath;
+        let destinationObjs = [
+          { value: destination._id, label: destination.location },
+        ];
+
+        if (path) {
+          path.forEach(item => {
+            if (item.source && item.destination) {
+              destinationObjs = [
+                ...destinationObjs,
+                { value: `${item._id}1`, label: item.source },
+                { value: `${item._id}2`, label: item.destination },
+              ];
+            }
+          });
+
+          const keys = ['label'];
+
+          const filtered = destinationObjs.filter(
+            (s => o =>
+              (k => !s.has(k) && s.add(k))(keys.map(k => o[k]).join('|')))(
+              new Set()
+            )
+          );
+
+          destinationObjs = filtered;
         }
 
-        return item;
-      });
-
-    return filteredOptions;
+        setDestinationsOptions(destinationObjs);
+      }
+    } else {
+      setDestinationsOptions([]);
+    }
   };
 
   const handleChange = (name, selectedOption) => {
     setFormValues({ ...formValues, [name]: selectedOption });
+    setFilterValues({
+      ...filterValues,
+      [name]: selectedOption
+        ? name === 'destination'
+          ? selectedOption.label
+          : selectedOption
+        : null,
+    });
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    let filterFormValues = {};
-
-    if (tripType === 'roundTrip') {
-      filterFormValues = { ...formValues, arrival_date: null };
-    }
 
     if (departure_date && destination && source) {
-      const result = queryString.stringify(filterFormValues);
+      const result = queryString.stringify(filterValues);
       window.location.href = `${window.location.origin}/vway/trips?${result}`;
     }
   };
@@ -70,8 +115,8 @@ const Filters = props => {
           label="Departure Terminal"
           iconName="departure"
           isSearchable
-          onChange={handleChange}
-          options={dropdownOptions()}
+          onChange={handleSourceChange}
+          options={sourceDropdownOptions()}
           value={formValues.source}
         />
 
@@ -81,11 +126,12 @@ const Filters = props => {
           iconName="destination"
           isSearchable
           onChange={handleChange}
-          options={dropdownOptions()}
+          disabled={!destinationsOptions.length}
+          options={destinationsOptions}
           value={formValues.destination}
         />
 
-        <SelectInputField
+        <DayPickerInputField
           name="departure_date"
           label="Departure Date"
           iconName="calendar"
@@ -95,7 +141,7 @@ const Filters = props => {
         />
 
         {option === 'option1' && (
-          <SelectInputField
+          <DayPickerInputField
             name="arrival_date"
             label="Arrival Date"
             iconName="calendar"
@@ -107,7 +153,16 @@ const Filters = props => {
 
         <div className="selectbox-container vm-filters-submit-btn-wrap">
           <div>
-            <button type="submit" className="vm-submit-btn" disabled={!departure_date || !destination || !source}>
+            <button
+              type="submit"
+              className="vm-submit-btn"
+              disabled={
+                !departure_date ||
+                !destination ||
+                !source ||
+                (tripType === 'roundTrip' && !arrival_date)
+              }
+            >
               Book Trip
             </button>
           </div>
@@ -120,7 +175,7 @@ const Filters = props => {
     <div className="vm-filters-container">
       <Tabs
         onSelect={index => {
-          const tripList = [ 'roundTrip', 'oneWayTrip' ];
+          const tripList = ['roundTrip', 'oneWayTrip'];
 
           setTripType(tripList[index]);
         }}

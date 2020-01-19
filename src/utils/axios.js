@@ -15,8 +15,9 @@ const axiosInstance = axios.create(defaultOptions);
 
 axiosInstance.interceptors.request.use(
   config => {
-    config.headers["x-api-key"] = api_key || process.env.REACT_APP_API_KEY;
-    config.headers["x-access-token"] = api_key || process.env.REACT_APP_API_TOKEN;
+    config.headers["x-client-key"] = api_key || process.env.REACT_APP_CLIENT_KEY;
+    config.headers["x-access-token"] = process.env.REACT_APP_API_TOKEN;
+    config.headers["x-api-key"] = "Voomsway";
     return config;
   },
   error => {

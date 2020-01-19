@@ -120,7 +120,8 @@ body {
             display: block;
           }
 
-          .selectbox-container {
+          .selectbox-container,
+          .date-picker-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -141,10 +142,21 @@ body {
               }
             }
 
+            .day-picker-input-container {
+              .DayPickerInput input {
+                border: 0;
+                border-top: 1px solid rgb(234, 234, 234);
+                box-sizing: border-box;
+                border-radius: 0;
+                font-size: 14px;
+              }
+            }
+
             .react-select__control {
               border-radius: 0;
               border: 0;
               border-top: 1px solid rgb(234, 234, 234);
+              font-size: 14px;
             }
 
             .react-select__control--is-focused {
