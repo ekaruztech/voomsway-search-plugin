@@ -180,7 +180,7 @@ const Filters = props => {
         }}
         className="vm-filters-tab"
       >
-        <Container fluid className="py-2 px-0">
+        <Container fluid className="py-3 px-0">
           <Row>
             <Col md="3" lg="2" className="vm-filter-tab-nav-list">
               <TabList>
