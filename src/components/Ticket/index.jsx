@@ -18,10 +18,10 @@ const Ticket = props => {
   return (
     <Container fluid>
       <Row className="vm-ticket-container">
-        <Col md="5" className="input-container d-flex px-0 mr-3">
+        <Col md="12" lg="5" className="input-container">
           <label
             htmlFor=""
-            className="d-flex justify-content-center align-items-center"
+            className=""
           >
             Booking Reference
           </label>
@@ -35,7 +35,7 @@ const Ticket = props => {
           />
         </Col>
 
-        <Col className="vm-ticket-submit-btn-wrap divider">
+        <Col className="vm-ticket-submit-btn-wrap">
           <button
             type="submit"
             className="vm-submit-btn"

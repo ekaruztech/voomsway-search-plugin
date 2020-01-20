@@ -7,7 +7,7 @@ const api_key = root.dataset.apikey;
 // Default config options
 const defaultOptions = {
   baseURL: apiUrl || process.env.REACT_APP_HOST,
-  headers: {},
+  headers: {}
 };
 
 // Create instance
@@ -15,9 +15,8 @@ const axiosInstance = axios.create(defaultOptions);
 
 axiosInstance.interceptors.request.use(
   config => {
-    config.headers['x-client-key'] =
-      api_key || process.env.REACT_APP_CLIENT_KEY;
-    config.headers['x-api-key'] = process.env.REACT_API_KEY;
+    config.headers['x-client-key'] = api_key || process.env.REACT_APP_CLIENT_KEY;
+    config.headers['x-api-key'] = 'Voomsway';
     return config;
   },
   error => {

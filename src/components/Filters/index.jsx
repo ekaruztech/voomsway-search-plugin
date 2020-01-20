@@ -15,13 +15,13 @@ const Filters = props => {
     source: null,
     arrival_date: '',
     destination: null,
-    departure_date: '',
+    departure_date: ''
   };
 
-  const [tripType, setTripType] = useState('roundTrip');
-  const [destinationsOptions, setDestinationsOptions] = useState([]);
-  const [formValues, setFormValues] = useState(defaultFormValues);
-  const [filterValues, setFilterValues] = useState({});
+  const [ tripType, setTripType ] = useState('roundTrip');
+  const [ destinationsOptions, setDestinationsOptions ] = useState([]);
+  const [ formValues, setFormValues ] = useState(defaultFormValues);
+  const [ filterValues, setFilterValues ] = useState({});
   const { arrival_date, departure_date, destination, source } = formValues;
 
   const sourceDropdownOptions = () =>
@@ -31,7 +31,7 @@ const Filters = props => {
         travelPath &&
         travelPath.source && {
           value: travelPath._id,
-          label: `${travelPath.source.location}`,
+          label: `${travelPath.source.location}`
         }
     );
 
@@ -39,13 +39,15 @@ const Filters = props => {
     setFormValues({
       ...formValues,
       [name]: selectedOption,
-      destination: null,
+      destination: null
     });
 
     setFilterValues({
       ...filterValues,
-      [name]: selectedOption ? selectedOption.label : null,
-      destination: null,
+      [name]:
+        selectedOption ? selectedOption.label :
+        null,
+      destination: null
     });
 
     if (selectedOption) {
@@ -53,9 +55,7 @@ const Filters = props => {
       const travelPath = travelPaths.find(terminal => terminal._id === _id);
       if (travelPath) {
         const { destination, path } = travelPath;
-        let destinationObjs = [
-          { value: destination._id, label: destination.location },
-        ];
+        let destinationObjs = [ { value: destination._id, label: destination.location } ];
 
         if (path) {
           path.forEach(item => {
@@ -63,18 +63,15 @@ const Filters = props => {
               destinationObjs = [
                 ...destinationObjs,
                 { value: `${item._id}1`, label: item.source },
-                { value: `${item._id}2`, label: item.destination },
+                { value: `${item._id}2`, label: item.destination }
               ];
             }
           });
 
-          const keys = ['label'];
+          const keys = [ 'label' ];
 
           const filtered = destinationObjs.filter(
-            (s => o =>
-              (k => !s.has(k) && s.add(k))(keys.map(k => o[k]).join('|')))(
-              new Set()
-            )
+            (s => o => (k => !s.has(k) && s.add(k))(keys.map(k => o[k]).join('|')))(new Set())
           );
 
           destinationObjs = filtered;
@@ -91,11 +88,10 @@ const Filters = props => {
     setFormValues({ ...formValues, [name]: selectedOption });
     setFilterValues({
       ...filterValues,
-      [name]: selectedOption
-        ? name === 'destination'
-          ? selectedOption.label
-          : selectedOption
-        : null,
+      [name]:
+        selectedOption ? name === 'destination' ? selectedOption.label :
+        selectedOption :
+        null
     });
   };
 
@@ -113,7 +109,7 @@ const Filters = props => {
       <form onSubmit={handleSubmit} className="vm-filter-form">
         <Container fluid>
           <Row>
-            <Col className="divider">
+            <Col className="input-group">
               <SelectInputField
                 name="source"
                 label="Departure Terminal"
@@ -124,7 +120,7 @@ const Filters = props => {
                 value={formValues.source}
               />
             </Col>
-            <Col className="divider">
+            <Col className="input-group">
               <SelectInputField
                 name="destination"
                 label="Destination Terminal"
@@ -136,7 +132,7 @@ const Filters = props => {
                 value={formValues.destination}
               />
             </Col>
-            <Col className="divider">
+            <Col className="input-group">
               <DayPickerInputField
                 name="departure_date"
                 label="Departure Date"
@@ -147,7 +143,7 @@ const Filters = props => {
               />
             </Col>
             {option === 'option1' && (
-              <Col className="divider">
+              <Col className="input-group">
                 <DayPickerInputField
                   name="arrival_date"
                   label="Arrival Date"
@@ -158,21 +154,14 @@ const Filters = props => {
                 />
               </Col>
             )}
-            <Col className="divider d-flex align-items-center">
-              <div className="vm-filters-submit-btn-wrap">
-                <button
-                  type="submit"
-                  className="vm-submit-btn"
-                  disabled={
-                    !departure_date ||
-                    !destination ||
-                    !source ||
-                    (tripType === 'roundTrip' && !arrival_date)
-                  }
-                >
-                  Book Trip
-                </button>
-              </div>
+            <Col className="input-group vm-filters-submit-btn-wrap d-flex align-items-center">
+              <button
+                type="submit"
+                className="vm-submit-btn"
+                disabled={!departure_date || !destination || !source || (tripType === 'roundTrip' && !arrival_date)}
+              >
+                Book Trip
+              </button>
             </Col>
           </Row>
         </Container>
@@ -185,24 +174,21 @@ const Filters = props => {
       <Tabs
         defaultIndex={1}
         onSelect={index => {
-          const tripList = ['roundTrip', 'oneWayTrip'];
+          const tripList = [ 'roundTrip', 'oneWayTrip' ];
 
           setTripType(tripList[index]);
         }}
         className="vm-filters-tab"
       >
-        <Container fluid className="py-3">
+        <Container fluid className="py-2 px-0">
           <Row>
-            <Col
-              md="2"
-              className="m-0 d-flex justify-content-center align-items-center"
-            >
+            <Col md="3" lg="2" className="vm-filter-tab-nav-list">
               <TabList>
                 <Tab>Round Trip</Tab>
                 <Tab>one way trip</Tab>
               </TabList>
             </Col>
-            <Col md="10" className="p-0">
+            <Col md="9" lg="10" className="tab-panel-wrap">
               <TabPanel>{renderRoundTripForm('option1')}</TabPanel>
               <TabPanel>{renderRoundTripForm('option2')}</TabPanel>
             </Col>

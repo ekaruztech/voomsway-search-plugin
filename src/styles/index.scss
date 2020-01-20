@@ -9,12 +9,31 @@ body {
 // set background of div
 .vm-voomsway-filter {
   font-family: 'OpenSans', sans-serif;
-  // max-width: 1140px;
-  // margin: 0 auto;
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .vm-main-tab {
   width: 100%;
+
+  .input-group {
+    border-left: 1px solid rgb(234, 234, 234);
+
+    @media (max-width: 768px) {
+      border: 1px solid #eaeaea;
+      padding: 10px 1rem;
+      margin-bottom: 9px;
+      margin-right: 5px;
+      width: 48%;
+      display: inline-flex;
+      flex-basis: auto;
+    }
+
+    @media (max-width: 766px) {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
 
   .react-tabs__tab-list {
     display: flex;
@@ -37,10 +56,6 @@ body {
       &:focus::after {
         display: none;
       }
-
-      @media (max-width: 766px) {
-        width: 100%;
-      }
     }
 
     .react-tabs__tab--selected {
@@ -53,11 +68,6 @@ body {
       box-shadow: -10px 10px 10px 0 rgba(0, 0, 0, 0.29);
       transition: all 0.3s linear;
       width: 180px;
-
-      @media (max-width: 766px) {
-        font-size: 14px;
-        padding: 18px 1em;
-      }
     }
   }
 
@@ -67,20 +77,28 @@ body {
     .vm-filters-tab {
       display: flex;
 
-      @media (max-width: 766px) {
-        display: block;
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
+      .vm-filter-tab-nav-list {
+        padding-right: 0;
+
+        @media (max-width: 768px) {
+          padding: 15px;
+        }
       }
 
       .react-tabs__tab-list {
         flex-direction: column;
         justify-content: center;
+        height: 100%;
         align-items: center;
         margin: 0;
 
+        @media (max-width: 768px) {
+          justify-content: flex-start;
+        }
+
         @media (max-width: 766px) {
-          margin: 2em;
+          margin: 1em 0;
+          width: 100%;
         }
 
         .react-tabs__tab {
@@ -89,8 +107,9 @@ body {
           width: 112px;
 
           @media (max-width: 766px) {
-            padding: 1.2em 0;
-            font-size: 12px;
+            width: 100%;
+            padding: 12px 0;
+            font-size: 14px;
           }
         }
 
@@ -104,9 +123,18 @@ body {
           box-shadow: none;
 
           @media (max-width: 766px) {
-            padding: 1.2em 0;
-            font-size: 12px;
+            width: 100%;
+            padding: 12px 0;
+            font-size: 14px;
           }
+        }
+      }
+
+      .tab-panel-wrap {
+        padding-left: 0;
+
+        @media (max-width: 766px) {
+          padding-left: 15px;
         }
       }
 
@@ -118,22 +146,12 @@ body {
           flex-grow: 1;
           height: 100%;
 
-          @media (max-width: 766px) {
-            display: block;
-          }
-
           .selectbox-container,
           .date-picker-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             flex-grow: 1;
-
-            @media (max-width: 766px) {
-              border: 1px solid rgb(234, 234, 234);
-              margin: 1em 2em;
-              padding: 1em;
-            }
 
             &.vm-filters-submit-btn-wrap {
               @media (max-width: 766px) {
@@ -151,6 +169,11 @@ body {
                 color: #000000;
                 font-weight: 600;
               }
+            }
+
+            .react-select__menu {
+              z-index: 100;
+              color: #000000;
             }
 
             .react-select__control {
@@ -171,26 +194,33 @@ body {
             }
 
             .vm-form-label {
-              padding: 0.4em;
+              padding: .375rem .3rem;
               padding-left: 0;
-              font-size: 14px;
+              font-size: 13px;
               font-weight: 300;
               color: #495057;
+              margin: 0;
+
+              @media (max-width: 768px) {
+                min-width: 200px;
+              }
 
               .label-icon {
                 margin-right: 0.5em;
-                width: 13px;
-                margin-top: 2px !important;
+                width: 11px;
+                margin-top: -3px !important;
               }
+            }
+          }
+
+          .input-group.vm-filters-submit-btn-wrap {
+            @media (max-width: 768px) {
+              border: 0;
             }
           }
         }
       }
     }
-  }
-
-  .divider {
-    border-left: 1px solid rgb(234, 234, 234);
   }
 
   .vm-submit-btn {
@@ -210,12 +240,6 @@ body {
       cursor: not-allowed;
       opacity: 0.7;
     }
-
-    @media (max-width: 766px) {
-      display: block;
-      width: 100%;
-      padding: 1.5em 20px;
-    }
   }
 
   .vm-ticket-container {
@@ -223,15 +247,22 @@ body {
     display: flex;
     padding: 1.5em 3em;
 
-    @media (max-width: 766px) {
+    @media (max-width: 768px) {
       display: block;
-      padding: 3em;
     }
 
     .input-container {
+      display: flex;
       border: 1px solid rgb(234, 234, 234);
-      flex-grow: 1;
-      flex-basis: 0;
+      padding: 0;
+      margin-right: 15px;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        margin: 0;
+        padding: 10px 1rem;
+        margin-bottom: 10px;
+      }
 
       @media (max-width: 766px) {
         flex-direction: column;
@@ -242,32 +273,42 @@ body {
         padding: 11px 25px;
         background-color: rgb(247, 247, 247);
         height: 100%;
-        width: 100%;
+        white-space: nowrap;
+        width: auto;
         border-radius: 0;
         border-color: #eaeaea;
         color: #495057;
+        font-size: 14px;
+        margin: 0;
+
+        @media (max-width: 768px) {
+          border: 1px solid rgb(234, 234, 234);
+          border-right: 0;
+        }
 
         @media (max-width: 766px) {
-          padding: 1em 0;
-          padding-left: 1em;
-          width: 100%;
-          box-sizing: border-box;
+          border: 1px solid rgb(234, 234, 234);
+          border-bottom: 0;
         }
       }
 
       .input-control {
         padding: 0 25px;
+        min-width: 0;
         width: 100%;
-        height: 100%;
+
+        // height: 100%;
         border: 0;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #495057;
+
+        @media (max-width: 768px) {
+          border: 1px solid rgb(234, 234, 234);
+        }
 
         @media (max-width: 766px) {
-          padding: 1em 0;
-          padding-left: 1em;
-          width: 100%;
-          box-sizing: border-box;
+          padding: 11px 25px;
         }
       }
     }
@@ -275,21 +316,20 @@ body {
     .vm-ticket-submit-btn-wrap {
       border-left: 1px solid rgb(234, 234, 234);
       padding-left: 1em;
+      display: flex;
+      align-items: center;
 
-      @media (max-width: 766px) {
-        padding: 0;
-        border: 0;
+      @media (max-width: 768px) {
+        width: 100%;
+        padding: 10px 1rem;
+        border-left: 0;
+        justify-content: center;
       }
 
       .vm-submit-btn {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-
-        @media (max-width: 766px) {
-          margin-top: 1em;
-          top: 0;
-          transform: none;
+        @media (max-width: 768px) {
+          display: block;
+          width: 100%;
         }
       }
     }
