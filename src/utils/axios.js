@@ -3,11 +3,12 @@ import axios from 'axios';
 const root = document.getElementById('voomsway-search-root');
 const apiUrl = root.dataset.apiurl;
 const api_key = root.dataset.apikey;
+const client_key = root.dataset.clientkey;
 
 // Default config options
 const defaultOptions = {
   baseURL: apiUrl || process.env.REACT_APP_HOST,
-  headers: {}
+  headers: {},
 };
 
 // Create instance
@@ -15,8 +16,9 @@ const axiosInstance = axios.create(defaultOptions);
 
 axiosInstance.interceptors.request.use(
   config => {
-    config.headers['x-client-key'] = api_key || process.env.REACT_APP_CLIENT_KEY;
-    config.headers['x-api-key'] = 'Voomsway';
+    config.headers['x-client-key'] =
+      client_key || process.env.REACT_APP_CLIENT_KEY;
+    config.headers['x-api-key'] = api_key || process.env.REACT_API_KEY;
     return config;
   },
   error => {
