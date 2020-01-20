@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
   config => {
     config.headers['x-client-key'] =
       client_key || process.env.REACT_APP_CLIENT_KEY;
-    config.headers['x-api-key'] = api_key || process.env.REACT_API_KEY;
+    config.headers['x-api-key'] = api_key || process.env.REACT_APP_API_KEY;
     return config;
   },
   error => {
