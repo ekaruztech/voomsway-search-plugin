@@ -351,3 +351,25 @@ body {
     }
   }
 }
+
+.vm-modal .modal-content {
+  .modal-body {
+    .card .card-body {
+      h4 {
+        color: rgb(155, 155, 155);
+        font-size: 0.7rem;
+        margin: 0;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin: 0;
+
+        .currency {
+          color: rgb(155, 155, 155);
+          margin-right: 0.3em;
+        }
+      }
+    }
+  }
+}

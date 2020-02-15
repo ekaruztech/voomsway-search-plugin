@@ -16,6 +16,7 @@ const App = () => {
       const travelPathsResult = await axiosInstance.get(travelPathsUrl);
       setTravelPaths(travelPathsResult.data.data);
     } catch (error) {
+      console.log('error :', error);
       setError(true);
     }
   };
@@ -39,6 +40,7 @@ const App = () => {
             <Ticket />
           </TabPanel>
         </Tabs>
+        {error && <div>Issue with the sever, please try again.</div>}
       </div>
     </div>
   );

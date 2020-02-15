@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const root = document.getElementById('voomsway-search-root');
 const apiUrl = root.dataset.apiurl;
-const api_key = root.dataset.apikey;
-const client_key = root.dataset.clientkey;
+const apikey = root.dataset.apikey;
+const apiClientKey = root.dataset.apiClientKey;
 
 // Default config options
 const defaultOptions = {
@@ -17,8 +17,8 @@ const axiosInstance = axios.create(defaultOptions);
 axiosInstance.interceptors.request.use(
   config => {
     config.headers['x-client-key'] =
-      client_key || process.env.REACT_APP_CLIENT_KEY;
-    config.headers['x-api-key'] = api_key || process.env.REACT_APP_API_KEY;
+    apiClientKey || process.env.REACT_APP_CLIENT_KEY;
+    config.headers['x-api-key'] = apikey || process.env.REACT_APP_API_KEY;
     return config;
   },
   error => {
