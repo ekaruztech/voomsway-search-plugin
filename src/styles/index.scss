@@ -352,22 +352,22 @@ body {
   }
 }
 
-.vm-modal .modal-content {
-  .modal-body {
-    .card .card-body {
-      h4 {
-        color: rgb(155, 155, 155);
-        font-size: 0.7rem;
-        margin: 0;
-      }
+.vm-modal.modal-dialog {
+  max-width: 1140px !important;
 
-      p {
-        font-size: 1.2rem;
-        margin: 0;
+  .modal-content {
+    .modal-body {
+      .card .card-body {
+        .brand {
+          text-align: center;
+          img {
+            width: 5em;
+          }
+        }
 
-        .currency {
-          color: rgb(155, 155, 155);
-          margin-right: 0.3em;
+        th,
+        td {
+          font-size: 0.8rem;
         }
       }
     }

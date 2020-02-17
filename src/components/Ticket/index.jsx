@@ -1,14 +1,5 @@
-import React, { Fragment, useState, useRef } from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from 'reactstrap';
+import React, { Fragment, useState, useRef, useEffect } from 'react';
+import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { savePDF } from '@progress/kendo-react-pdf';
 import ReactToPrint from 'react-to-print';
 import TransactionView from './TransactionView';
@@ -26,16 +17,19 @@ class PDFService {
       date: new Date(),
       producer: companyName,
       creator: companyName,
-      author: companyName,
+      author: companyName
     });
   };
 }
 
 const Ticket = props => {
-  const [ticketNo, setTicketNo] = React.useState('');
-  const [transaction, setTransaction] = React.useState({});
-  const [loading, setLoading] = React.useState(null);
-  const [modal, setModal] = useState(false);
+  const [ ticketNo, setTicketNo ] = React.useState('');
+  const [ account, setAccount ] = React.useState(null);
+  console.log('account :', account);
+  const [ transaction, setTransaction ] = React.useState(null);
+  console.log('transaction :', transaction);
+  const [ loading, setLoading ] = React.useState(null);
+  const [ modal, setModal ] = useState(false);
 
   const componentRef = useRef();
   const htmlRef = useRef();
@@ -55,9 +49,31 @@ const Ticket = props => {
   const root = document.getElementById('voomsway-search-root');
   const apiClientKey = root.dataset.apiClientKey;
 
+  const requestAccountString = `api/setting/${apiClientKey ||
+    process.env.REACT_APP_CLIENT_KEY}?population=[{"path": "account"}]`;
+
+  useEffect(
+    () => {
+      const fetchAccount = async () => {
+        try {
+          setLoading(true);
+          const accountResult = await axiosInstance.get(requestAccountString);
+          setAccount(accountResult.data.data);
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+          setAccount(null);
+        }
+      };
+
+      fetchAccount();
+    },
+    [ requestAccountString ]
+  );
+
   const requestString = `/transactions/${ticketNo}/verifyByRef/Booking?apiClientKey${apiClientKey ||
     process.env
-      .REACT_APP_CLIENT_KEY}&population=[{"path": "transaction_objects", "populate": [{"path": "trip"}] }, {"path": "account"}, {"path": "customer"}]`;
+      .REACT_APP_CLIENT_KEY}&population=[{"path": "transaction_objects", "populate": [{"path": "trip"}] }, {"path": "account"}, {"path": "customer"}, {"path": "trip"}]`;
 
   const fetchResources = async () => {
     try {
@@ -67,38 +83,29 @@ const Ticket = props => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
+      setTransaction(null);
     }
   };
 
   const renderModal = () => (
     <div>
-      <Modal isOpen={modal} toggle={toggle} className="vm-modal modal-lg">
-        <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+      <Modal isOpen={modal} toggle={toggle} className="vm-modal modal-xl">
+        <ModalHeader toggle={toggle} />
         <ModalBody>
-          {loading ? (
-            'Loading ...'
-          ) : (
-            <TransactionView
-              data={transaction}
-              ref={componentRef}
-              htmlRef={htmlRef}
-            />
-          )}
+          <TransactionView
+            account={account}
+            data={transaction}
+            ref={componentRef}
+            htmlRef={htmlRef}
+            loading={loading}
+          />
         </ModalBody>
         <ModalFooter>
-          <Button
-            className="pull-right "
-            color="primary"
-            onClick={() => createPdf()}
-          >
+          <Button className="pull-right " color="primary" onClick={() => createPdf()}>
             Download to Pdf
           </Button>
           <ReactToPrint
-            trigger={() => (
-              <Button className="pull-right mr-3 btn-dark">
-                Print receipt
-              </Button>
-            )}
+            trigger={() => <Button className="pull-right mr-3 btn-dark">Print receipt</Button>}
             content={() => htmlRef.current}
             bodyClass="style"
           />
@@ -126,12 +133,7 @@ const Ticket = props => {
           </Col>
 
           <Col className="vm-ticket-submit-btn-wrap">
-            <button
-              type="submit"
-              className="vm-submit-btn"
-              onClick={toggle}
-              disabled={!ticketNo}
-            >
+            <button type="submit" className="vm-submit-btn" onClick={toggle} disabled={!ticketNo || !account}>
               Search Ticket
             </button>
           </Col>
