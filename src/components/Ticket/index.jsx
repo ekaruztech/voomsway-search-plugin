@@ -89,7 +89,7 @@ const Ticket = props => {
 
   const renderModal = () => (
     <div>
-      <Modal isOpen={modal} toggle={toggle} className="vm-modal modal-xl">
+      <Modal isOpen={modal} toggle={toggle} className="vm-modal modal-lg">
         <ModalHeader toggle={toggle} />
         <ModalBody>
           <TransactionView
