@@ -360,14 +360,18 @@ body {
       .card .card-body {
         .brand {
           text-align: center;
+          border-bottom: 1px solid #dee2e6;
+          margin-bottom: 1em;
+
           img {
             width: 5em;
           }
         }
-
-        th,
-        td {
-          font-size: 0.8rem;
+        .vertical-align {
+          th,
+          td {
+            font-size: 1.6rem;
+          }
         }
       }
     }

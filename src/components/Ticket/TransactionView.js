@@ -43,36 +43,31 @@ class TransactionView extends React.Component {
                     <h3>{account.account.basic_information.organization_name}</h3>
                   </div>
                 )}
-                <Table bordered responsive>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Customer's Name</th>
-                      <th>Amount Paid</th>
-                      <th>Payment Date</th>
-                      <th>Transaction Type</th>
-                      <th>Payment Option</th>
-                      <th>Transaction Ref</th>
-                      <th>Payment Status</th>
-                      <th>Travel Path</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      loading ? <tr>
-                        <td colSpan={9}>
-                          <p className="text-center">Loading ...</p>
-                        </td>
-                      </tr> :
-                      !data ? <tr>
-                        <td colSpan={9}>
-                          <Alert color="info" className="text-center">
-                            The transaction ID you provided does not match any booking, Please check and try again...
-                          </Alert>
-                        </td>
-                      </tr> :
+                {
+                  loading ? <div>
+                    <p className="text-center">Loading ...</p>
+                  </div> :
+                  !data ? <div>
+                    <Alert color="info" className="text-center">
+                      The transaction ID you provided does not match any booking, Please check and try again...
+                    </Alert>
+                  </div> :
+                  <Table bordered responsive className="vertical-align">
+                    {/* <thead>
                       <tr>
-                        <th scope="row">1</th>
+                        <th className="border-top-0">Customer's Name</th>
+                        <th>Amount Paid</th>
+                        <th>Payment Date</th>
+                        <th>Transaction Type</th>
+                        <th>Payment Option</th>
+                        <th>Transaction Ref</th>
+                        <th>Payment Status</th>
+                        <th>Travel Path</th>
+                      </tr>
+                    </thead> */}
+                    <tbody>
+                      <tr>
+                        <th>Customer's Name</th>
                         <td>
                           {
                             customer ? `${capitalizeFirstLetter(customer.first_name)} ${capitalizeFirstLetter(
@@ -80,27 +75,45 @@ class TransactionView extends React.Component {
                             )}` :
                             'N/A'}
                         </td>
+                      </tr>
+                      <tr>
+                        <th>Amount Paid</th>
                         <td>{`${currency} ${amount}`}</td>
+                      </tr>
+                      <tr>
+                        <th>Payment Date</th>
                         <td>
                           {
                             payment_date ? moment(payment_date).format('LL, h:mm a') :
                             'N/A'}
                         </td>
+                      </tr>
+                      <tr>
+                        <th>Transaction Type</th>
                         <td>
                           {
                             transaction_type ? transaction_type :
                             'N/A'}
                         </td>
+                      </tr>
+                      <tr>
+                        <th>Payment Option</th>
                         <td>
                           {
                             payment_option ? payment_option :
                             'N/A'}
                         </td>
+                      </tr>
+                      <tr>
+                        <th>Transaction Ref</th>
                         <td>
                           {
                             user_ref ? user_ref :
                             'N/A'}
                         </td>
+                      </tr>
+                      <tr>
+                        <th>Payment Status</th>
                         <td>
                           <Badge color="success">
                             {
@@ -108,10 +121,13 @@ class TransactionView extends React.Component {
                               'N/A'}
                           </Badge>
                         </td>
+                      </tr>
+                      <tr>
+                        <th>Travel Path</th>
                         <td>{renderTravelPath()}</td>
-                      </tr>}
-                  </tbody>
-                </Table>
+                      </tr>
+                    </tbody>
+                  </Table>}
               </Col>
             </Row>
           </CardBody>
