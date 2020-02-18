@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { uniqBy } from 'lodash';
+import moment from 'moment';
 import queryString from 'query-string';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import SelectInputField from '../common/SelectInputField';
@@ -24,6 +25,7 @@ const Filters = props => {
   const [ formValues, setFormValues ] = useState(defaultFormValues);
   console.log('formValues :', formValues);
   const [ filterValues, setFilterValues ] = useState({});
+  console.log('filterValues :', filterValues);
   const { arrival_date, departure_date, destination, source } = formValues;
 
   const getTravelPathFromSource = (sourceId, terminals = []) => {
@@ -64,7 +66,7 @@ const Filters = props => {
     setFilterValues({
       ...filterValues,
       [name]:
-        selectedOption ? selectedOption.label :
+        selectedOption ? selectedOption.value :
         null,
       destination: null
     });
@@ -79,11 +81,12 @@ const Filters = props => {
   };
 
   const handleChange = (name, selectedOption) => {
+    console.log('selectedOption :', selectedOption);
     setFormValues({ ...formValues, [name]: selectedOption });
     setFilterValues({
       ...filterValues,
       [name]:
-        selectedOption ? name === 'destination' ? selectedOption.label :
+        selectedOption ? name === 'destination' ? selectedOption.value :
         selectedOption :
         null
     });
@@ -91,8 +94,12 @@ const Filters = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    filterValues.departure_date = moment(filterValues.departure_date).format('YYYY-MM-DD');
 
     if (departure_date && destination && source) {
+      if (arrival_date) {
+        filterValues.arrival_date = moment(filterValues.arrival_date).format('YYYY-MM-DD');
+      }
       const result = queryString.stringify(filterValues);
       window.location.href = `${window.location.origin}/vway/trips?${result}`;
     }
