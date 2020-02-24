@@ -23,9 +23,7 @@ const Filters = props => {
   const [ tripType, setTripType ] = useState('oneWayTrip');
   const [ destinationsOptions, setDestinationsOptions ] = useState([]);
   const [ formValues, setFormValues ] = useState(defaultFormValues);
-  console.log('formValues :', formValues);
   const [ filterValues, setFilterValues ] = useState({});
-  console.log('filterValues :', filterValues);
   const { arrival_date, departure_date, destination, source } = formValues;
 
   const getTravelPathFromSource = (sourceId, terminals = []) => {
@@ -81,7 +79,6 @@ const Filters = props => {
   };
 
   const handleChange = (name, selectedOption) => {
-    console.log('selectedOption :', selectedOption);
     setFormValues({ ...formValues, [name]: selectedOption });
     setFilterValues({
       ...filterValues,
@@ -101,7 +98,7 @@ const Filters = props => {
         filterValues.arrival_date = moment(filterValues.arrival_date).format('YYYY-MM-DD');
       }
       const result = queryString.stringify(filterValues);
-      window.location.href = `${window.location.origin}/vway/trips?${result}`;
+      window.location.href = `booking.${window.location.origin.split('//')[1]}/vway/trips?${result}`;
     }
   };
 
