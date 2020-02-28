@@ -21,5 +21,6 @@ export const capitalizeFirstLetter = string => {
 
 export const vehicleTypesUrl = '/resources/vehicle-types';
 export const travelPathsUrl = '/travelPaths/locations';
+export const charterUrl = '/charters/create';
 // export const terminalsUrl = '/terminals?selection=account name destinations location.city location.state&all=true&population=[{"path": "destinations", "select": "account name destinations location.city location.state"}]';
 export const terminalsUrl = '/terminals?selection=account name destinations location.city location.state&all=true';

@@ -6,6 +6,7 @@ import axiosInstance from '../utils/axios';
 import { travelPathsUrl } from '../utils/helpers';
 import Filters from './Filters';
 import Ticket from './Ticket';
+import Charter from './Charter';
 
 const App = () => {
   const [ error, setError ] = useState(false);
@@ -32,12 +33,16 @@ const App = () => {
           <TabList>
             <Tab>Book Trip</Tab>
             <Tab>Check Ticket</Tab>
+            <Tab>Charters</Tab>
           </TabList>
           <TabPanel>
             <Filters travelPaths={travelPaths} />
           </TabPanel>
           <TabPanel>
             <Ticket />
+          </TabPanel>
+          <TabPanel>
+            <Charter />
           </TabPanel>
         </Tabs>
         {error && <div>Issue with the sever, please try again.</div>}
