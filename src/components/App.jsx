@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.scss';
 import '../styles/index.scss';
 import axiosInstance from '../utils/axios';
-import { travelPathsUrl } from '../utils/helpers';
+import { setupsUrl } from '../utils/helpers';
 import Filters from './Filters';
 import Ticket from './Ticket';
 import Charter from './Charter';
@@ -11,11 +11,16 @@ import Charter from './Charter';
 const App = () => {
   const [ error, setError ] = useState(false);
   const [ travelPaths, setTravelPaths ] = useState([]);
+  const [ redirectUrl, setRedirectUrl ] = useState('');
+  const [ settings, setSettings ] = useState({});
 
   const fetchResources = async () => {
     try {
-      const travelPathsResult = await axiosInstance.get(travelPathsUrl);
-      setTravelPaths(travelPathsResult.data.data);
+      const travelPathsResult = await axiosInstance.get(setupsUrl);
+      console.log('travelPathsResult :', travelPathsResult);
+      setTravelPaths(travelPathsResult.data.data.locations);
+      setRedirectUrl(travelPathsResult.data.data.settings.contactInfo.website);
+      setSettings(travelPathsResult.data.data.settings);
     } catch (error) {
       console.log('error :', error);
       setError(true);
@@ -36,10 +41,10 @@ const App = () => {
             <Tab>Charters</Tab>
           </TabList>
           <TabPanel>
-            <Filters travelPaths={travelPaths} />
+            <Filters travelPaths={travelPaths} redirectUrl={redirectUrl} />
           </TabPanel>
           <TabPanel>
-            <Ticket />
+            <Ticket settings={settings} />
           </TabPanel>
           <TabPanel>
             <Charter />

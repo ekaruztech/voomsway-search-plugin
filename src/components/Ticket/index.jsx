@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useRef, useEffect } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { savePDF } from '@progress/kendo-react-pdf';
 import ReactToPrint from 'react-to-print';
@@ -22,12 +22,9 @@ class PDFService {
   };
 }
 
-const Ticket = props => {
+const Ticket = ({ settings }) => {
   const [ ticketNo, setTicketNo ] = React.useState('');
-  const [ account, setAccount ] = React.useState(null);
-  console.log('account :', account);
   const [ transaction, setTransaction ] = React.useState(null);
-  console.log('transaction :', transaction);
   const [ loading, setLoading ] = React.useState(null);
   const [ modal, setModal ] = useState(false);
 
@@ -48,28 +45,6 @@ const Ticket = props => {
 
   const root = document.getElementById('voomsway-search-root');
   const apiClientKey = root.dataset.apiClientKey;
-
-  const requestAccountString = `api/setting/${apiClientKey ||
-    process.env.REACT_APP_CLIENT_KEY}?population=[{"path": "account"}]`;
-
-  useEffect(
-    () => {
-      const fetchAccount = async () => {
-        try {
-          setLoading(true);
-          const accountResult = await axiosInstance.get(requestAccountString);
-          setAccount(accountResult.data.data);
-          setLoading(false);
-        } catch (error) {
-          setLoading(false);
-          setAccount(null);
-        }
-      };
-
-      fetchAccount();
-    },
-    [ requestAccountString ]
-  );
 
   const requestString = `/transactions/${ticketNo}/verifyByRef/Booking?apiClientKey${apiClientKey ||
     process.env
@@ -93,7 +68,7 @@ const Ticket = props => {
         <ModalHeader toggle={toggle} />
         <ModalBody>
           <TransactionView
-            account={account}
+            account={settings}
             data={transaction}
             ref={componentRef}
             htmlRef={htmlRef}
@@ -133,7 +108,7 @@ const Ticket = props => {
           </Col>
 
           <Col className="vm-ticket-submit-btn-wrap">
-            <button type="submit" className="vm-submit-btn" onClick={toggle} disabled={!ticketNo || !account}>
+            <button type="submit" className="vm-submit-btn" onClick={toggle} disabled={!ticketNo || !settings}>
               Search Ticket
             </button>
           </Col>

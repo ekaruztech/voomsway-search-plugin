@@ -11,7 +11,7 @@ import 'react-tabs/style/react-tabs.scss';
 import { Col, Container, Row } from 'reactstrap';
 
 const Filters = props => {
-  const { travelPaths } = props;
+  const { travelPaths, redirectUrl } = props;
 
   const defaultFormValues = {
     source: null,
@@ -98,7 +98,7 @@ const Filters = props => {
         filterValues.arrival_date = moment(filterValues.arrival_date).format('YYYY-MM-DD');
       }
       const result = queryString.stringify(filterValues);
-      window.location.href = `booking.${window.location.origin.split('//')[1]}/vway/trips?${result}`;
+      window.location.href = `${redirectUrl}?${result}`;
     }
   };
 

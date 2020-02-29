@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Col, Container, Row, FormGroup, Input, Label, Alert } from 'reactstrap';
 import axiosInstance from '../../utils/axios';
 import { charterUrl } from '../../utils/helpers';
@@ -10,14 +9,14 @@ const Charter = props => {
     first_name: '',
     last_name: '',
     mobile: '',
-    no_of_vehicle: 0
+    no_of_vehicle: 0,
+    note: ''
   };
 
   const [ charterFormValues, setCharterFormValues ] = useState(defaultFormValues);
   const [ error, setError ] = useState(false);
   const [ loading, setLoading ] = useState(false);
   const [ showError, setShowError ] = useState(false);
-  console.log('charterFormValues :', charterFormValues);
 
   const onChange = event => {
     const { name, value } = event.target;
@@ -25,7 +24,7 @@ const Charter = props => {
     setCharterFormValues({ ...charterFormValues, [name]: value });
   };
 
-  const { email, first_name, last_name, mobile, no_of_vehicle } = charterFormValues;
+  const { email, first_name, last_name, mobile, no_of_vehicle, note } = charterFormValues;
 
   const fetchResources = async e => {
     e.preventDefault();
@@ -57,62 +56,81 @@ const Charter = props => {
   return (
     <form className="vm-charter-form" onSubmit={fetchResources}>
       <Container fluid>
-        <Row xs="1" md="5">
-          <Col>
+        <Row>
+          <Col sm="1" md="3">
             <FormGroup>
               <Label for="email">Email</Label>
               <Input type="email" name="email" id="email" placeholder="enter email" onChange={onChange} value={email} />
             </FormGroup>
           </Col>
-          <Col>
-            <FormGroup>
-              <Label for="first_name">First Name</Label>
-              <Input
-                type="text"
-                name="first_name"
-                id="first_name"
-                placeholder="Enter your first name"
-                onChange={onChange}
-                value={first_name}
-              />
-            </FormGroup>
+          <Col sm="1" md="9">
+            <Row>
+              <Col sm="1" md="3">
+                <FormGroup>
+                  <Label for="first_name">First Name</Label>
+                  <Input
+                    type="text"
+                    name="first_name"
+                    id="first_name"
+                    placeholder="Enter your first name"
+                    onChange={onChange}
+                    value={first_name}
+                  />
+                </FormGroup>
+              </Col>
+              <Col sm="1" md="3">
+                <FormGroup>
+                  <Label for="last_name">Last Name</Label>
+                  <Input
+                    type="text"
+                    name="last_name"
+                    id="last_name"
+                    placeholder="Enter your last name"
+                    onChange={onChange}
+                    value={last_name}
+                  />
+                </FormGroup>
+              </Col>
+              <Col sm="1" md="3">
+                <FormGroup>
+                  <Label for="mobile">Mobile</Label>
+                  <Input
+                    type="tel"
+                    name="mobile"
+                    id="mobile"
+                    placeholder="Enter mobile number"
+                    onChange={onChange}
+                    value={mobile}
+                  />
+                </FormGroup>
+              </Col>
+              <Col sm="1" md="3">
+                <FormGroup>
+                  <Label for="no_of_vehicle">Number of Vehicle</Label>
+                  <Input
+                    type="number"
+                    name="no_of_vehicle"
+                    id="no_of_vehicle"
+                    placeholder="Enter number of vehicle"
+                    onChange={onChange}
+                    value={no_of_vehicle}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
           </Col>
-          <Col>
+        </Row>
+        <Row>
+          <Col sm="1" md="5">
             <FormGroup>
-              <Label for="last_name">Last Name</Label>
+              <Label for="note">Note</Label>
               <Input
-                type="text"
-                name="last_name"
-                id="last_name"
-                placeholder="Enter your last name"
+                type="textarea"
+                name="note"
+                id="note"
+                placeholder="Enter a short note here"
                 onChange={onChange}
-                value={last_name}
-              />
-            </FormGroup>
-          </Col>
-          <Col>
-            <FormGroup>
-              <Label for="mobile">Mobile</Label>
-              <Input
-                type="tel"
-                name="mobile"
-                id="mobile"
-                placeholder="Enter mobile number"
-                onChange={onChange}
-                value={mobile}
-              />
-            </FormGroup>
-          </Col>
-          <Col>
-            <FormGroup>
-              <Label for="no_of_vehicle">Number of Vehicle</Label>
-              <Input
-                type="number"
-                name="no_of_vehicle"
-                id="no_of_vehicle"
-                placeholder="Enter number of vehicle"
-                onChange={onChange}
-                value={no_of_vehicle}
+                value={note}
               />
             </FormGroup>
           </Col>
@@ -138,7 +156,7 @@ const Charter = props => {
               <button
                 type="submit"
                 className="vm-submit-btn"
-                disabled={loading || !email || !first_name || !last_name || !mobile || no_of_vehicle === 0}
+                disabled={loading || !email || !note || !first_name || !last_name || !mobile || no_of_vehicle === 0}
               >
                 Submit
               </button>
@@ -149,7 +167,5 @@ const Charter = props => {
     </form>
   );
 };
-
-Charter.propTypes = {};
 
 export default Charter;
