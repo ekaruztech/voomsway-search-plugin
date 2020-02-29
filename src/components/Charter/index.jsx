@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { Col, Container, Row, FormGroup, Input, Label, Alert } from 'reactstrap';
+import {
+  Col,
+  Container,
+  Row,
+  FormGroup,
+  Input,
+  Label,
+  Alert,
+} from 'reactstrap';
 import axiosInstance from '../../utils/axios';
 import { charterUrl } from '../../utils/helpers';
 
@@ -10,13 +18,13 @@ const Charter = props => {
     last_name: '',
     mobile: '',
     no_of_vehicle: 0,
-    note: ''
+    note: '',
   };
 
-  const [ charterFormValues, setCharterFormValues ] = useState(defaultFormValues);
-  const [ error, setError ] = useState(false);
-  const [ loading, setLoading ] = useState(false);
-  const [ showError, setShowError ] = useState(false);
+  const [charterFormValues, setCharterFormValues] = useState(defaultFormValues);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const onChange = event => {
     const { name, value } = event.target;
@@ -24,7 +32,14 @@ const Charter = props => {
     setCharterFormValues({ ...charterFormValues, [name]: value });
   };
 
-  const { email, first_name, last_name, mobile, no_of_vehicle, note } = charterFormValues;
+  const {
+    email,
+    first_name,
+    last_name,
+    mobile,
+    no_of_vehicle,
+    note,
+  } = charterFormValues;
 
   const fetchResources = async e => {
     e.preventDefault();
@@ -60,7 +75,14 @@ const Charter = props => {
           <Col sm="1" md="3">
             <FormGroup>
               <Label for="email">Email</Label>
-              <Input type="email" name="email" id="email" placeholder="enter email" onChange={onChange} value={email} />
+              <Input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="enter email"
+                onChange={onChange}
+                value={email}
+              />
             </FormGroup>
           </Col>
           <Col sm="1" md="9">
@@ -121,14 +143,13 @@ const Charter = props => {
           </Col>
         </Row>
         <Row>
-          <Col sm="1" md="5">
+          <Col sm="1" md="12">
             <FormGroup>
-              <Label for="note">Note</Label>
               <Input
                 type="textarea"
                 name="note"
                 id="note"
-                placeholder="Enter a short note here"
+                placeholder="Write a short note here. Tell us more on what you expect"
                 onChange={onChange}
                 value={note}
               />
@@ -137,26 +158,30 @@ const Charter = props => {
         </Row>
         <Row>
           <Col className="vm-charter-submit-btn-container">
-            {
-              loading ? <div className="vm-charter-loading-wrap">
+            {loading ? (
+              <div className="vm-charter-loading-wrap">
                 <p>loading ...</p>
-              </div> :
+              </div>
+            ) : (
               showError && (
-                <Alert
-                  color={
-
-                      error ? 'danger' :
-                      'success'
-                  }
-                >
+                <Alert color={error ? 'danger' : 'success'}>
                   {renderErrorMessage()}
                 </Alert>
-              )}
+              )
+            )}
             <div className="vm-charter-submit-btn-wrap">
               <button
                 type="submit"
                 className="vm-submit-btn"
-                disabled={loading || !email || !note || !first_name || !last_name || !mobile || no_of_vehicle === 0}
+                disabled={
+                  loading ||
+                  !email ||
+                  !note ||
+                  !first_name ||
+                  !last_name ||
+                  !mobile ||
+                  no_of_vehicle === 0
+                }
               >
                 Submit
               </button>
