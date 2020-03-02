@@ -17,7 +17,7 @@ const axiosInstance = axios.create(defaultOptions);
 axiosInstance.interceptors.request.use(
   config => {
     config.headers['x-client-key'] =
-    apiClientKey || process.env.REACT_APP_CLIENT_KEY;
+      apiClientKey || process.env.REACT_APP_CLIENT_KEY;
     config.headers['x-api-key'] = apikey || process.env.REACT_APP_API_KEY;
     return config;
   },
