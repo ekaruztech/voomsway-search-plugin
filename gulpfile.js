@@ -20,3 +20,4 @@ gulp.task('merge-css', function() {
 
 // gulp.task('default', ['merge-js', 'merge-css']);
 gulp.task('merge-all', gulp.parallel('merge-js', 'merge-css'));
+

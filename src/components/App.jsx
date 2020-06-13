@@ -9,10 +9,10 @@ import Ticket from './Ticket';
 import Charter from './Charter';
 
 const App = () => {
-  const [ error, setError ] = useState(false);
-  const [ travelPaths, setTravelPaths ] = useState([]);
-  const [ redirectUrl, setRedirectUrl ] = useState('');
-  const [ settings, setSettings ] = useState({});
+  const [error, setError] = useState(false);
+  const [travelPaths, setTravelPaths] = useState([]);
+  const [redirectUrl, setRedirectUrl] = useState('');
+  const [settings, setSettings] = useState({});
 
   const fetchResources = async () => {
     try {
@@ -50,7 +50,18 @@ const App = () => {
             <Charter />
           </TabPanel>
         </Tabs>
-        {error && <div>Issue with the sever, please try again.</div>}
+        {error && (
+          <div className="mt-1">
+            <img
+              className="label-icon error-animate mb-1"
+              src={'./assets/icons/error.svg'}
+              alt="error icon"
+            />{' '}
+            <span className="server-error">
+              Issue with the sever, please try again.
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

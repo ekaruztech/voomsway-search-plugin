@@ -13,413 +13,449 @@ body {
   margin: 0 auto;
 }
 
-.vm-main-tab {
-  width: 100%;
+.vm-tab-container {
+  margin: 0 auto;
+  width: 90%;
+  .vm-main-tab {
+    width: 100%;
 
-  .input-group {
-    border-left: 1px solid rgb(234, 234, 234);
-
-    @media (max-width: 768px) {
-      border: 1px solid #eaeaea;
-      padding: 10px 1rem;
-      margin-bottom: 9px;
-      margin-right: 5px;
-      width: 48%;
-      display: inline-flex;
-      flex-basis: auto;
-    }
-
-    @media (max-width: 766px) {
-      width: 100%;
-      margin-right: 0;
-    }
-  }
-
-  .react-tabs__tab-list {
-    display: flex;
-    align-items: flex-end;
-    align-content: flex-start;
-    border: 0;
-
-    .react-tabs__tab {
-      border: 0;
-      width: 168px;
-      padding: 12px 20px;
-      text-align: center;
-      background: #eaeaea;
-      border-radius: 0;
-      color: rgba(0, 0, 0, 0.5);
-      font-size: 14px;
-      font-weight: 600;
-      transition: all 0.3s linear;
-
-      &:focus::after {
-        display: none;
-      }
-    }
-
-    .react-tabs__tab--selected {
-      padding: 18px 30px;
-      color: $color-primary;
-      text-transform: uppercase;
-      font-size: 15px;
-      font-weight: 700;
-      background: #ffffff;
-      box-shadow: -10px 10px 10px 0 rgba(0, 0, 0, 0.29);
-      transition: all 0.3s linear;
-      width: 180px;
-    }
-  }
-
-  .vm-filters-container {
-    background-color: #fff;
-
-    .vm-filters-container-inner {
-      padding-left: 0;
+    .input-group {
+      border-left: 1px solid rgb(234, 234, 234);
 
       @media (max-width: 768px) {
-        padding: 15px;
+        border: 1px solid #eaeaea;
+        padding: 10px 0.5rem;
+        margin-bottom: 9px;
+        margin-right: 5px;
+        width: 20%;
+        display: inline-flex;
+        flex-basis: auto;
+      }
+
+      @media (max-width: 766px) {
+        width: 100%;
+        margin-right: 0;
       }
     }
 
-    .vm-filters-tab {
+    .react-tabs__tab-list {
       display: flex;
+      align-items: flex-end;
+      align-content: flex-start;
+      border: 0;
 
-      .vm-filter-tab-nav-list {
-        padding-right: 0;
+      .react-tabs__tab {
+        border: 0;
+        width: 168px;
+        padding: 12px 20px;
+        text-align: center;
+        background: #eaeaea;
+        border-radius: 0;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s linear;
+
+        &:focus::after {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 12px;
+          padding: 9px 5px;
+        }
+      }
+
+      .react-tabs__tab--selected {
+        padding: 18px 30px;
+        color: $color-primary;
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: 700;
+        background: #ffffff;
+        box-shadow: -10px 10px 10px 0 rgba(0, 0, 0, 0.29);
+        transition: all 0.3s linear;
+        width: 180px;
+
+        @media (max-width: 768px) {
+          font-size: 10px;
+          padding: 12px 10px;
+        }
+      }
+    }
+
+    .vm-filters-container {
+      background-color: #fff;
+
+      .vm-filters-container-inner {
+        padding-left: 0;
 
         @media (max-width: 768px) {
           padding: 15px;
-          padding-top: 0;
-          // padding-right: 0;
         }
       }
 
-      .react-tabs__tab-list {
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        align-items: center;
-        margin: 0;
+      .vm-filters-tab {
+        display: flex;
 
-        @media (max-width: 768px) {
-          justify-content: flex-start;
-          // padding-right: 0;
-        }
+        .vm-filter-tab-nav-list {
+          padding-right: 0;
 
-        @media (max-width: 766px) {
-          margin: 1em 0;
-          width: 100%;
-        }
-
-        .react-tabs__tab {
-          font-size: 11px;
-          padding: 10px 0;
-          width: 112px;
-
-          @media (max-width: 766px) {
-            width: 100%;
-            padding: 12px 0;
-            font-size: 14px;
+          @media (max-width: 768px) {
+            padding: 15px;
+            padding-top: 7px;
+            // padding-right: 0;
           }
         }
 
-        .react-tabs__tab--selected {
-          padding: 10px 0;
-          color: #ffffff;
-          text-transform: uppercase;
-          font-size: 11px;
-          font-weight: 600;
-          background: $color-primary;
-          box-shadow: none;
-
-          @media (max-width: 766px) {
-            width: 100%;
-            padding: 12px 0;
-            font-size: 14px;
-          }
-        }
-      }
-
-      .tab-panel-wrap {
-        padding-left: 0;
-
-        @media (max-width: 766px) {
-          padding-left: 15px;
-        }
-      }
-
-      .react-tabs__tab-panel {
-        width: 100%;
-
-        .vm-filter-form {
-          display: flex;
-          flex-grow: 1;
+        .react-tabs__tab-list {
+          flex-direction: column;
+          justify-content: center;
           height: 100%;
+          align-items: center;
+          margin: 0;
 
-          .selectbox-container,
-          .date-picker-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
+          @media (max-width: 768px) {
+            justify-content: flex-start;
+            // padding-right: 0;
+          }
 
-            &.vm-filters-submit-btn-wrap {
-              @media (max-width: 766px) {
-                border: 0;
-              }
+          @media (max-width: 766px) {
+            margin: 1em 0;
+            width: 100%;
+          }
+
+          .react-tabs__tab {
+            font-size: 11px;
+            padding: 10px 0;
+            width: 112px;
+
+            @media (max-width: 766px) {
+              width: 100%;
+              padding: 12px 0;
+              font-size: 14px;
             }
+          }
 
-            .day-picker-input-container {
-              .DayPickerInput input {
+          .react-tabs__tab--selected {
+            padding: 10px 0;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 600;
+            background: $color-primary;
+            box-shadow: none;
+
+            @media (max-width: 766px) {
+              width: 100%;
+              padding: 12px 0;
+              font-size: 14px;
+            }
+          }
+        }
+
+        .tab-panel-wrap {
+          padding-left: 0;
+
+          @media (max-width: 766px) {
+            padding-left: 15px;
+          }
+        }
+
+        .react-tabs__tab-panel {
+          width: 100%;
+
+          .vm-filter-form {
+            display: flex;
+            flex-grow: 1;
+            height: 100%;
+
+            .selectbox-container,
+            .date-picker-container {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              flex-grow: 1;
+
+              &.vm-filters-submit-btn-wrap {
+                @media (max-width: 766px) {
+                  border: 0;
+                }
+              }
+
+              .day-picker-input-container {
+                .DayPickerInput input {
+                  border: 0;
+                  border-top: 1px solid rgb(234, 234, 234);
+                  box-sizing: border-box;
+                  border-radius: 0;
+                  font-size: 14px;
+                  color: #000000;
+                  font-weight: 600;
+                }
+              }
+
+              .react-select__menu {
+                z-index: 100;
+                color: #000000;
+              }
+
+              .react-select__control {
+                border-radius: 0;
                 border: 0;
                 border-top: 1px solid rgb(234, 234, 234);
-                box-sizing: border-box;
-                border-radius: 0;
+                color: #fd0000;
                 font-size: 14px;
-                color: #000000;
                 font-weight: 600;
+
+                @media (max-width: 768px) {
+                  font-size: 9.5px;
+                }
+              }
+
+              .react-select__control--is-focused {
+                box-shadow: none;
+              }
+
+              .react-select__indicator-separator {
+                display: none;
+              }
+
+              .vm-form-label {
+                padding: 0.375rem 0.3rem;
+                padding-left: 0;
+                font-size: 13px;
+                font-weight: 300;
+                color: #495057;
+                margin: 0;
+
+                @media (max-width: 768px) {
+                  min-width: 200px;
+                  font-size: 9.5px;
+                }
+
+                .label-icon {
+                  margin-right: 0.5em;
+                  width: 11px;
+                  margin-top: -3px !important;
+                }
               }
             }
 
-            .react-select__menu {
-              z-index: 100;
-              color: #000000;
-            }
-
-            .react-select__control {
-              border-radius: 0;
-              border: 0;
-              border-top: 1px solid rgb(234, 234, 234);
-              color: #000000;
-              font-size: 14px;
-              font-weight: 600;
-            }
-
-            .react-select__control--is-focused {
-              box-shadow: none;
-            }
-
-            .react-select__indicator-separator {
-              display: none;
-            }
-
-            .vm-form-label {
-              padding: .375rem .3rem;
-              padding-left: 0;
-              font-size: 13px;
-              font-weight: 300;
-              color: #495057;
-              margin: 0;
-
+            .input-group.vm-filters-submit-btn-wrap {
               @media (max-width: 768px) {
-                min-width: 200px;
-              }
-
-              .label-icon {
-                margin-right: 0.5em;
-                width: 11px;
-                margin-top: -3px !important;
+                border: 0;
               }
             }
           }
-
-          .input-group.vm-filters-submit-btn-wrap {
-            @media (max-width: 768px) {
-              border: 0;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .vm-submit-btn {
-    color: rgb(255, 255, 255);
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 13px;
-    background: rgb(71, 184, 4);
-    padding: 10px 20px;
-    border-radius: 0px;
-    transition: all 0.3s linear 0s;
-    flex-grow: 0;
-    cursor: pointer;
-    border: 0;
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.7;
-    }
-
-    @media (max-width: 766px) {
-      display: block;
-      width: 100%;
-    }
-  }
-
-  .vm-charter-form {
-    background-color: #ffffff;
-    padding: 1.5em 1em;
-
-    .form-group {
-      font-size: 12px;
-
-      label {
-        margin-bottom: 0.2em;
-        color: #495057;
-      }
-
-      .form-control {
-        font-size: 14px;
-        font-weight: 600;
-        @media (max-width: 766px) {
-          padding: 1.5em 1em;
-        }
-
-        &::placeholder {
-          font-weight: 400;
         }
       }
     }
 
-    .vm-charter-loading-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: rgb(248, 248, 248);
+    .vm-submit-btn {
+      color: rgb(255, 255, 255);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 13px;
+      background: rgb(71, 184, 4);
+      padding: 10px 20px;
+      border-radius: 0px;
+      transition: all 0.3s linear 0s;
+      flex-grow: 0;
+      cursor: pointer;
+      border: 0;
 
-      p {
-        margin: 0.4em;
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
       }
-    }
 
-    .vm-charter-submit-btn-container {
-      display: grid;
-      grid-template-columns: 4fr 1fr;
-      align-items: center;
-      grid-template-areas: "error btn";
+      @media (max-width: 768px) {
+        font-size: 9.5px;
+        display: block;
+        width: 100%;
+      }
 
       @media (max-width: 766px) {
         display: block;
+        width: 100%;
+      }
+    }
+
+    .vm-charter-form {
+      background-color: #ffffff;
+      padding: 1.5em 1em;
+
+      @media (max-width: 768px) {
+        padding: 1.1em 1em;
       }
 
-      .alert {
-        grid-area: error;
-        padding: 10px 20px;
-        margin: 0 5em 0 0;
-        font-size: 14px;
-        flex-grow: 1;
-        text-align: center;
+      .form-group {
+        font-size: 12px;
+
+        @media (max-width: 768px) {
+          font-size: 11px;
+        }
+
+        label {
+          margin-bottom: 0.2em;
+          color: #495057;
+        }
+
+        .form-control {
+          font-size: 14px;
+          font-weight: 600;
+          @media (max-width: 768px) {
+            font-size: 10px;
+            padding: 1.5em 1em;
+          }
+
+          &::placeholder {
+            font-weight: 400;
+          }
+        }
+      }
+
+      .vm-charter-loading-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(248, 248, 248);
+
+        p {
+          margin: 0.4em;
+        }
+      }
+
+      .vm-charter-submit-btn-container {
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        align-items: center;
+        grid-template-areas: 'error btn';
 
         @media (max-width: 766px) {
           display: block;
+        }
+
+        .alert {
+          grid-area: error;
+          padding: 10px 20px;
+          margin: 0 5em 0 0;
+          font-size: 14px;
+          flex-grow: 1;
+          text-align: center;
+
+          @media (max-width: 766px) {
+            display: block;
+            width: 100%;
+            margin: 0;
+            margin-bottom: 2em;
+          }
+        }
+
+        .vm-charter-submit-btn-wrap {
+          grid-area: btn;
+          text-align: right;
+
+          .vm-submit-btn {
+            padding-left: 4em;
+            padding-right: 4em;
+          }
+        }
+      }
+    }
+
+    .vm-ticket-container {
+      background-color: #fff;
+      display: flex;
+      padding: 1.5em 3em;
+
+      @media (max-width: 768px) {
+        display: block;
+      }
+
+      .input-container {
+        display: flex;
+        border: 1px solid rgb(234, 234, 234);
+        padding: 0;
+        margin-right: 15px;
+
+        @media (max-width: 768px) {
           width: 100%;
           margin: 0;
-          margin-bottom: 2em;
+          padding: 10px 1.5rem;
+          margin-bottom: 10px;
+        }
+
+        @media (max-width: 766px) {
+          flex-direction: column;
+          margin: 0;
+        }
+
+        label {
+          padding: 11px 25px;
+          background-color: rgb(247, 247, 247);
+          height: 100%;
+          white-space: nowrap;
+          width: auto;
+          border-radius: 0;
+          border-color: #eaeaea;
+          color: #495057;
+          font-size: 14px;
+          margin: 0;
+
+          @media (max-width: 768px) {
+            border: 1px solid rgb(234, 234, 234);
+            border-right: 0;
+            font-size: 11px;
+          }
+
+          @media (max-width: 766px) {
+            border: 1px solid rgb(234, 234, 234);
+            border-bottom: 0;
+          }
+        }
+
+        .input-control {
+          padding: 0 25px;
+          min-width: 0;
+          width: 100%;
+
+          // height: 100%;
+          border: 0;
+          font-size: 1rem;
+          font-weight: 400;
+          color: #495057;
+
+          @media (max-width: 768px) {
+            border: 1px solid rgb(234, 234, 234);
+            font-size: 12px;
+          }
+
+          @media (max-width: 766px) {
+            padding: 11px 25px;
+          }
         }
       }
 
-      .vm-charter-submit-btn-wrap {
-        grid-area: btn;
-        text-align: right;
+      .vm-ticket-submit-btn-wrap {
+        border-left: 1px solid rgb(234, 234, 234);
+        padding-left: 1em;
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 768px) {
+          width: 100%;
+          padding: 10px 1rem;
+          border-left: 0;
+          justify-content: center;
+        }
 
         .vm-submit-btn {
-          padding-left: 4em;
-          padding-right: 4em;
-        }
-      }
-    }
-  }
-
-  .vm-ticket-container {
-    background-color: #fff;
-    display: flex;
-    padding: 1.5em 3em;
-
-    @media (max-width: 768px) {
-      display: block;
-    }
-
-    .input-container {
-      display: flex;
-      border: 1px solid rgb(234, 234, 234);
-      padding: 0;
-      margin-right: 15px;
-
-      @media (max-width: 768px) {
-        width: 100%;
-        margin: 0;
-        padding: 10px 1rem;
-        margin-bottom: 10px;
-      }
-
-      @media (max-width: 766px) {
-        flex-direction: column;
-        margin: 0;
-      }
-
-      label {
-        padding: 11px 25px;
-        background-color: rgb(247, 247, 247);
-        height: 100%;
-        white-space: nowrap;
-        width: auto;
-        border-radius: 0;
-        border-color: #eaeaea;
-        color: #495057;
-        font-size: 14px;
-        margin: 0;
-
-        @media (max-width: 768px) {
-          border: 1px solid rgb(234, 234, 234);
-          border-right: 0;
-        }
-
-        @media (max-width: 766px) {
-          border: 1px solid rgb(234, 234, 234);
-          border-bottom: 0;
-        }
-      }
-
-      .input-control {
-        padding: 0 25px;
-        min-width: 0;
-        width: 100%;
-
-        // height: 100%;
-        border: 0;
-        font-size: 1rem;
-        font-weight: 400;
-        color: #495057;
-
-        @media (max-width: 768px) {
-          border: 1px solid rgb(234, 234, 234);
-        }
-
-        @media (max-width: 766px) {
-          padding: 11px 25px;
-        }
-      }
-    }
-
-    .vm-ticket-submit-btn-wrap {
-      border-left: 1px solid rgb(234, 234, 234);
-      padding-left: 1em;
-      display: flex;
-      align-items: center;
-
-      @media (max-width: 768px) {
-        width: 100%;
-        padding: 10px 1rem;
-        border-left: 0;
-        justify-content: center;
-      }
-
-      .vm-submit-btn {
-        @media (max-width: 768px) {
-          display: block;
-          width: 100%;
+          @media (max-width: 768px) {
+            display: block;
+            width: 100%;
+          }
         }
       }
     }
@@ -449,4 +485,43 @@ body {
       }
     }
   }
+}
+
+.css-1fhf3k1-control {
+  @media (min-width: 426px) {
+    width: 100px !important;
+  }
+}
+
+.css-yk16xz-control {
+  @media (min-width: 426px) {
+    width: 100px !important;
+  }
+}
+
+.vm-tab-container
+  .vm-main-tab
+  .vm-filters-container
+  .vm-filters-tab
+  .react-tabs__tab-panel
+  .vm-filter-form
+  .date-picker-container
+  .day-picker-input-container
+  .DayPickerInput
+  input {
+  @media (max-width: 768px) {
+    font-size: 9.5px;
+  }
+}
+
+.day-picker-input-container {
+  @media (min-width: 426px) {
+    width: 100px !important;
+  }
+}
+
+.server-error {
+  font-size: 13.5px;
+  color: #1d1d1d !important;
+  font-weight: 400;
 }

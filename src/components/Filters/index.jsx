@@ -17,23 +17,25 @@ const Filters = props => {
     source: null,
     arrival_date: undefined,
     destination: null,
-    departure_date: undefined
+    departure_date: undefined,
   };
 
-  const [ tripType, setTripType ] = useState('oneWayTrip');
-  const [ destinationsOptions, setDestinationsOptions ] = useState([]);
-  const [ formValues, setFormValues ] = useState(defaultFormValues);
-  const [ filterValues, setFilterValues ] = useState({});
+  const [tripType, setTripType] = useState('oneWayTrip');
+  const [destinationsOptions, setDestinationsOptions] = useState([]);
+  const [formValues, setFormValues] = useState(defaultFormValues);
+  const [filterValues, setFilterValues] = useState({});
   const { arrival_date, departure_date, destination, source } = formValues;
 
   const getTravelPathFromSource = (sourceId, terminals = []) => {
-    const sourceTerminals = terminals.filter(terminal => terminal.source && terminal.source._id === sourceId);
+    const sourceTerminals = terminals.filter(
+      terminal => terminal.source && terminal.source._id === sourceId
+    );
     if (sourceTerminals.length) {
       const reducer = (accumulator, current) => {
         if (current.path && current.path.length) {
           const mappedPath = current.path.map(item => ({
             value: item.destination._id,
-            label: capitalizeFirstLetter(item.destination.location)
+            label: capitalizeFirstLetter(item.destination.location),
           }));
           return accumulator.concat(mappedPath);
         }
@@ -47,10 +49,12 @@ const Filters = props => {
 
   const departureTerminalOptions = uniqBy(
     travelPaths &&
-      travelPaths.filter(item => !!item._id && !!item.source && !!item.source.location).map(item => ({
-        label: capitalizeFirstLetter(item.source.location),
-        value: item.source._id
-      })),
+      travelPaths
+        .filter(item => !!item._id && !!item.source && !!item.source.location)
+        .map(item => ({
+          label: capitalizeFirstLetter(item.source.location),
+          value: item.source._id,
+        })),
     'value'
   );
 
@@ -58,15 +62,13 @@ const Filters = props => {
     setFormValues({
       ...formValues,
       [name]: selectedOption,
-      destination: null
+      destination: null,
     });
 
     setFilterValues({
       ...filterValues,
-      [name]:
-        selectedOption ? selectedOption.value :
-        null,
-      destination: null
+      [name]: selectedOption ? selectedOption.value : null,
+      destination: null,
     });
     if (selectedOption) {
       const { value: _id } = selectedOption;
@@ -82,20 +84,25 @@ const Filters = props => {
     setFormValues({ ...formValues, [name]: selectedOption });
     setFilterValues({
       ...filterValues,
-      [name]:
-        selectedOption ? name === 'destination' ? selectedOption.value :
-        selectedOption :
-        null
+      [name]: selectedOption
+        ? name === 'destination'
+          ? selectedOption.value
+          : selectedOption
+        : null,
     });
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    filterValues.departure_date = moment(filterValues.departure_date).format('YYYY-MM-DD');
+    filterValues.departure_date = moment(filterValues.departure_date).format(
+      'YYYY-MM-DD'
+    );
 
     if (departure_date && destination && source) {
       if (arrival_date) {
-        filterValues.arrival_date = moment(filterValues.arrival_date).format('YYYY-MM-DD');
+        filterValues.arrival_date = moment(filterValues.arrival_date).format(
+          'YYYY-MM-DD'
+        );
       }
       const result = queryString.stringify(filterValues);
       window.location.href = `${redirectUrl}?${result}`;
@@ -160,9 +167,7 @@ const Filters = props => {
                   !departure_date ||
                   !destination ||
                   !source ||
-                  (
-                    tripType === 'roundTrip' ? !arrival_date :
-                    false)
+                  (tripType === 'roundTrip' ? !arrival_date : false)
                 }
               >
                 Book Trip
@@ -179,7 +184,7 @@ const Filters = props => {
       <Tabs
         defaultIndex={1}
         onSelect={index => {
-          const tripList = [ 'roundTrip', 'oneWayTrip' ];
+          const tripList = ['roundTrip', 'oneWayTrip'];
 
           setTripType(tripList[index]);
         }}

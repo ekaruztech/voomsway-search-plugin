@@ -21,7 +21,11 @@ const SelectInputField = props => {
   };
 
   const renderIcon = iconName => (
-    <img className="label-icon" src={`./assets/icons/${iconName}.svg`} alt="calendar icon" />
+    <img
+      className="label-icon"
+      src={`./assets/icons/${iconName}.svg`}
+      alt="calendar icon"
+    />
   );
 
   return (

@@ -1,5 +1,14 @@
 import React, { Fragment, useState, useRef } from 'react';
-import { Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
 import { savePDF } from '@progress/kendo-react-pdf';
 import ReactToPrint from 'react-to-print';
 import TransactionView from './TransactionView';
@@ -17,16 +26,16 @@ class PDFService {
       date: new Date(),
       producer: companyName,
       creator: companyName,
-      author: companyName
+      author: companyName,
     });
   };
 }
 
 const Ticket = ({ settings }) => {
-  const [ ticketNo, setTicketNo ] = React.useState('');
-  const [ transaction, setTransaction ] = React.useState(null);
-  const [ loading, setLoading ] = React.useState(null);
-  const [ modal, setModal ] = useState(false);
+  const [ticketNo, setTicketNo] = React.useState('');
+  const [transaction, setTransaction] = React.useState(null);
+  const [loading, setLoading] = React.useState(null);
+  const [modal, setModal] = useState(false);
 
   const componentRef = useRef();
   const htmlRef = useRef();
@@ -76,11 +85,19 @@ const Ticket = ({ settings }) => {
           />
         </ModalBody>
         <ModalFooter>
-          <Button className="pull-right " color="primary" onClick={() => createPdf()}>
+          <Button
+            className="pull-right "
+            color="primary"
+            onClick={() => createPdf()}
+          >
             Download to Pdf
           </Button>
           <ReactToPrint
-            trigger={() => <Button className="pull-right mr-3 btn-dark">Print receipt</Button>}
+            trigger={() => (
+              <Button className="pull-right mr-3 btn-dark">
+                Print receipt
+              </Button>
+            )}
             content={() => htmlRef.current}
             bodyClass="style"
           />
@@ -108,7 +125,12 @@ const Ticket = ({ settings }) => {
           </Col>
 
           <Col className="vm-ticket-submit-btn-wrap">
-            <button type="submit" className="vm-submit-btn" onClick={toggle} disabled={!ticketNo || !settings}>
+            <button
+              type="submit"
+              className="vm-submit-btn"
+              onClick={toggle}
+              disabled={!ticketNo || !settings}
+            >
               Search Ticket
             </button>
           </Col>
