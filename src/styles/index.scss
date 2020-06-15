@@ -487,6 +487,8 @@ body {
   }
 }
 
+
+
 .css-1fhf3k1-control {
   @media (min-width: 426px) {
     width: 100px !important;
@@ -496,6 +498,18 @@ body {
 .css-yk16xz-control {
   @media (min-width: 426px) {
     width: 100px !important;
+  }
+}
+
+.css-yk16xz-control {
+  @media (min-width: 1024px) {
+    width: 160px !important;
+  } 
+}
+
+.css-1fhf3k1-control {
+  @media (min-width: 1024px) {
+    width: 160px !important;
   }
 }
 
@@ -517,6 +531,10 @@ body {
 .day-picker-input-container {
   @media (min-width: 426px) {
     width: 100px !important;
+  }
+
+  @media (min-width: 1024px) {
+    width: 150px !important;
   }
 }
 
