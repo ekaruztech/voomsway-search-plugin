@@ -6,7 +6,6 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import SelectInputField from '../common/SelectInputField';
 import DayPickerInputField from '../common/DayPickerInputField';
 import { capitalizeFirstLetter, searchDateArray } from '../../utils/helpers';
-
 import 'react-tabs/style/react-tabs.scss';
 import { Col, Container, Row } from 'reactstrap';
 

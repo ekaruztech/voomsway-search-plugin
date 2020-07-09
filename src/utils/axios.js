@@ -7,7 +7,7 @@ const apiclientkey = root.dataset.apiclientkey;
 
 // Default config options
 const defaultOptions = {
-  baseURL: apiUrl || process.env.REACT_APP_HOST,
+  baseURL: apiUrl || process.env.REACT_APP_API_URL,
   headers: {},
 };
 
@@ -17,7 +17,7 @@ const axiosInstance = axios.create(defaultOptions);
 axiosInstance.interceptors.request.use(
   config => {
     config.headers['x-client-key'] =
-      apiclientkey || process.env.REACT_APP_CLIENT_KEY;
+      apiclientkey || process.env.REACT_APP_API_CLIENT_KEY;
     config.headers['x-api-key'] = apikey || process.env.REACT_APP_API_KEY;
     return config;
   },

@@ -18,6 +18,7 @@ const Charter = props => {
     last_name: '',
     mobile: '',
     no_of_vehicle: 0,
+    pick_up: '',
     note: '',
   };
 
@@ -38,6 +39,7 @@ const Charter = props => {
     last_name,
     mobile,
     no_of_vehicle,
+    pick_up,
     note,
   } = charterFormValues;
 
@@ -48,6 +50,7 @@ const Charter = props => {
       setLoading(true);
       setShowError(false);
       await axiosInstance.post(charterUrl, charterFormValues);
+      console.log(charterFormValues);
       setError(false);
       setLoading(false);
       setShowError(true);
@@ -143,7 +146,19 @@ const Charter = props => {
           </Col>
         </Row>
         <Row>
-          <Col sm="1" md="12">
+          <Col sm="1" md="6">
+            <FormGroup>
+              <Input
+                type="textarea"
+                name="pick_up"
+                id="pick_up"
+                placeholder="Enter pickup"
+                onChange={onChange}
+                value={pick_up}
+              />
+            </FormGroup>
+          </Col>
+          <Col sm="1" md="6">
             <FormGroup>
               <Input
                 type="textarea"
