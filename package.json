@@ -1,6 +1,6 @@
 {
   "name": "voomsway-react-search-engine",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "dependencies": {
     "@progress/kendo-drawing": "^1.6.0",
