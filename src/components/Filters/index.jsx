@@ -41,7 +41,7 @@ const Filters = props => {
         return accumulator;
       };
       const paths = sourceTerminals.reduce(reducer, []);
-      return uniqBy(paths, 'value');
+      return uniqBy(paths.sort((a, b) => a.label - b.label), 'value');
     }
     return [];
   };
@@ -53,7 +53,8 @@ const Filters = props => {
         .map(item => ({
           label: capitalizeFirstLetter(item.source.location),
           value: item.source._id,
-        })),
+        }))
+        .sort((a, b) => a.label - b.label),
     'value'
   );
 

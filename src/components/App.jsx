@@ -19,7 +19,7 @@ const App = () => {
       const travelPathsResult = await axiosInstance.get(setupsUrl);
       console.log('travelPathsResult :', travelPathsResult);
       setTravelPaths(travelPathsResult.data.data.locations);
-      setRedirectUrl(travelPathsResult.data.data.settings.contactInfo.website);
+      setRedirectUrl(travelPathsResult.data.data.settings.basic.bookingsAppBaseUrl);
       setSettings(travelPathsResult.data.data.settings);
     } catch (error) {
       console.log('error :', error);
