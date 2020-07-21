@@ -489,15 +489,21 @@ body {
 
 
 
-.css-1fhf3k1-control {
-  @media (min-width: 426px) {
-    width: 100px !important;
+.selectbox-container {
+  @media (max-width: 768px) {
+    width: 50% !important;
   }
 }
 
+//.react-select__control--menu-is-open {
+//  @media (max-width: 768px) {
+//    background-color: #0b2e13 !important;
+//  }
+//}
+
 .css-yk16xz-control {
   @media (min-width: 426px) {
-    width: 100px !important;
+    width: 100% !important;
   }
 }
 

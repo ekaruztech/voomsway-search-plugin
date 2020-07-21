@@ -131,7 +131,7 @@ const Charter = props => {
               </Col>
               <Col sm="1" md="3">
                 <FormGroup>
-                  <Label for="no_of_vehicle">Number of Vehicle</Label>
+                  <Label for="no_of_vehicle">No of Vehicle</Label>
                   <Input
                     type="number"
                     name="no_of_vehicle"
