@@ -16,7 +16,7 @@ const Filters = props => {
     source: null,
     arrival_date: undefined,
     destination: null,
-    departure_date: undefined,
+    departure_date: new Date(),
   };
 
   const [tripType, setTripType] = useState('oneWayTrip');
@@ -155,6 +155,7 @@ const Filters = props => {
                   iconName="calendar"
                   onChange={handleChange}
                   options={searchDateArray(7)}
+                  placeholder={'hello'}
                   value={formValues.arrival_date}
                 />
               </Col>

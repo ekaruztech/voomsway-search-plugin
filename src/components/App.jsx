@@ -19,7 +19,9 @@ const App = () => {
       const travelPathsResult = await axiosInstance.get(setupsUrl);
       console.log('travelPathsResult :', travelPathsResult);
       setTravelPaths(travelPathsResult.data.data.locations);
-      setRedirectUrl(travelPathsResult.data.data.settings.basic.bookingsAppBaseUrl);
+      setRedirectUrl(
+        travelPathsResult.data.data.settings.basic.bookingsAppBaseUrl
+      );
       setSettings(travelPathsResult.data.data.settings);
     } catch (error) {
       console.log('error :', error);
@@ -37,18 +39,32 @@ const App = () => {
         <Tabs className="vm-main-tab">
           <TabList>
             <Tab>Book Trip</Tab>
-            <Tab>Check Ticket</Tab>
-            <Tab>Charters</Tab>
+            <Tab>
+              <a href={`${redirectUrl}/check-ticket`} className="text-success">
+                Check Ticket
+              </a>
+            </Tab>
+            <Tab>
+              <a href={`${redirectUrl}/charters/new`} className="text-success">
+                Charters
+              </a>
+            </Tab>
           </TabList>
           <TabPanel>
-            <Filters travelPaths={travelPaths} redirectUrl={redirectUrl} />
+            <Filters
+              travelPaths={travelPaths}
+              redirectUrl={redirectUrl}
+              initialValues={new Date()}
+            />
           </TabPanel>
+          {/**
           <TabPanel>
             <Ticket settings={settings} />
           </TabPanel>
           <TabPanel>
             <Charter />
           </TabPanel>
+  */}
         </Tabs>
         {error && (
           <div className="mt-1">
