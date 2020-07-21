@@ -50,6 +50,7 @@ const DayPickerInputField = props => {
           formatDate={formatDate}
           format="LL"
           placeholder={placeholder || `${formatDate(new Date(), 'LL')}`}
+          renderDay
           onDayChange={handleSelectChange}
           value={value}
           dayPickerProps={{
