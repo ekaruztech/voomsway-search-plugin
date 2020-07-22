@@ -188,14 +188,37 @@ body {
               }
 
               .day-picker-input-container {
+                @media (max-width: 768px) {
+                  width: 100px !important;
+                }
+                @media (max-width: 766px) {
+                  width: 100% !important;
+                }
+                @media (max-width: 426px) {
+                  width: 100% !important;
+                }
+                @media (min-width: 1024px) {
+                  width: 150px !important;
+                }
                 .DayPickerInput input {
                   border: 0;
                   border-top: 1px solid rgb(234, 234, 234);
                   box-sizing: border-box;
                   border-radius: 0;
                   font-size: 14px;
-                  color: #000000;
+                  color: #353535;
                   font-weight: 600;
+                  @media (max-width: 768px) {
+                    width: 100px !important;
+                    font-size: 11px !important;
+                  }
+                    @media (max-width: 766px) {
+                      width: 100% !important;
+                    }
+                  @media (max-width: 426px) {
+                    width: 100% !important;
+                  }
+
                 }
               }
 
@@ -498,13 +521,10 @@ body {
       @media (min-width: 426px) {
         width: 100px !important;
       }
+      @media (max-width: 768px) {
+        width: 100% !important;
+      }
     }
-
-    //.react-select__control--menu-is-open {
-    //  @media (max-width: 768px) {
-    //    background-color: #0b2e13 !important;
-    //  }
-    //}
 
     .css-yk16xz-control {
       @media (min-width: 426px) {
@@ -536,16 +556,6 @@ body {
     input {
       @media (max-width: 768px) {
         font-size: 9.5px;
-      }
-    }
-
-    .day-picker-input-container {
-      @media (min-width: 426px) {
-        width: 100px !important;
-      }
-
-      @media (min-width: 1024px) {
-        width: 150px !important;
       }
     }
 
