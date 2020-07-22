@@ -63,7 +63,7 @@ body {
         padding: 10px 0.5rem;
         margin-bottom: 9px;
         margin-right: 5px;
-        width: 20%;
+        width: 30%;
         display: inline-flex;
         flex-basis: auto;
       }
@@ -599,6 +599,17 @@ body {
       font-size: 13.5px;
       color: #1d1d1d !important;
       font-weight: 400;
+    }
+  }
+
+  .css-tlfecz-indicatorContainer {
+    @media (max-width: 900px) {
+      padding: 0 !important;
+    }
+  }
+  .css-tj5bde-Svg {
+    @media (max-width: 900px) {
+      width: 15px !important;
     }
   }
 }
