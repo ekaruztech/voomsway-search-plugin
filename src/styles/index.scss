@@ -14,10 +14,46 @@ body {
 }
 
 .vm-tab-container {
-  margin: 0 auto;
+  margin: 50px auto;
   width: 90%;
   .vm-main-tab {
     width: 100%;
+
+    .link-tab {
+      background: #eaeaea;
+      margin-bottom: -1px;
+      border: 0;
+      width: 168px;
+      padding: 12px 20px;
+      text-align: center;
+      background: #eaeaea;
+      border-radius: 0;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s linear;
+
+      a {
+        color: rgba(0, 0, 0, 0.5);
+        text-decoration: none;
+      }
+      &:hover {
+        background: #f2f2f2;
+      }
+      &:active {
+        background: #fff;
+        font-weight: 700;
+        font-size: 15px;
+        transform: scale(1.01);
+        a {
+          color: #47b804;
+        }
+      }
+      @media (max-width: 768px) {
+        font-size: 12px;
+        padding: 9px 5px;
+      }
+    }
 
     .input-group {
       border-left: 1px solid rgb(234, 234, 234);
