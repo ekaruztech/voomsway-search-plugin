@@ -40,15 +40,11 @@ const App = () => {
           <TabList>
             <Tab>Book Trip</Tab>
             <Tab>
-              <a href={`${redirectUrl}/check-ticket`} className="text-success">
-                Check Ticket
-              </a>
+              <a>Check Ticket</a>
             </Tab>
-            <Tab>
-              <a href={`${redirectUrl}/charters/new`} className="text-success">
-                Charters
-              </a>
-            </Tab>
+            <div className="link-tab">
+              <a href={`${redirectUrl}/charters/new`}>Charters</a>
+            </div>
           </TabList>
           <TabPanel>
             <Filters
@@ -59,12 +55,12 @@ const App = () => {
           </TabPanel>
           {/**
           <TabPanel>
+          <Charter />
+          </TabPanel>
+        */}
+          <TabPanel>
             <Ticket settings={settings} />
           </TabPanel>
-          <TabPanel>
-            <Charter />
-          </TabPanel>
-  */}
         </Tabs>
         {error && (
           <div className="mt-1">
