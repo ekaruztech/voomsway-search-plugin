@@ -13,6 +13,7 @@ import { savePDF } from '@progress/kendo-react-pdf';
 import ReactToPrint from 'react-to-print';
 import TransactionView from './TransactionView';
 import axiosInstance from '../../utils/axios';
+import './ticket.scss';
 
 class PDFService {
   createPdf = (html, companyName = 'Voomsway Innovations Limited') => {
@@ -73,7 +74,7 @@ const Ticket = ({ settings }) => {
 
   const renderModal = () => (
     <div>
-      <Modal isOpen={modal} toggle={toggle} className="vm-modal modal-lg">
+      <Modal isOpen={modal} toggle={toggle} className="modal-width">
         <ModalHeader toggle={toggle} />
         <ModalBody>
           <TransactionView
@@ -84,7 +85,7 @@ const Ticket = ({ settings }) => {
             loading={loading}
           />
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter className="mx-auto">
           <Button
             className="pull-right "
             color="primary"

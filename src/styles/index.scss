@@ -603,13 +603,16 @@ body {
   }
 
   .css-tlfecz-indicatorContainer {
-    @media (max-width: 900px) {
+    @media (max-width: 990px) {
       padding: 0 !important;
     }
   }
   .css-tj5bde-Svg {
-    @media (max-width: 900px) {
+    @media (max-width: 990px) {
       width: 15px !important;
     }
+  }
+  .brand {
+    width: 12px;
   }
 }
