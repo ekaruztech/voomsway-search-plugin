@@ -155,7 +155,6 @@ const Filters = props => {
                   iconName="calendar"
                   onChange={handleChange}
                   options={searchDateArray(7)}
-                  placeholder={'hello'}
                   value={formValues.arrival_date}
                 />
               </Col>
