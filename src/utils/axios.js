@@ -4,6 +4,7 @@ const root = document.getElementById('voomsway-search-root');
 const apiUrl = root.dataset.apiurl;
 const apikey = root.dataset.apikey;
 const apiclientkey = root.dataset.apiclientkey;
+const sessionKey = root.dataset.sessionKey;
 
 // Default config options
 const defaultOptions = {
@@ -19,6 +20,8 @@ axiosInstance.interceptors.request.use(
     config.headers['x-client-key'] =
       apiclientkey || process.env.REACT_APP_API_CLIENT_KEY;
     config.headers['x-api-key'] = apikey || process.env.REACT_APP_API_KEY;
+    config.headers['x-session-key'] =
+      sessionKey || process.env.REACT_APP_SEARCH_PLUGIN_KEY;
     return config;
   },
   error => {
